@@ -3,157 +3,181 @@
 import { useEffect, useRef } from "react";
 
 export default function Hero() {
-  const bgRef = useRef<HTMLDivElement>(null);
+  const shapeRef  = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
+
     const onScroll = () => {
-      if (bgRef.current) bgRef.current.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+      const y = window.scrollY;
+      if (shapeRef.current)   shapeRef.current.style.transform   = `translateY(${y * 0.22}px)`;
+      if (contentRef.current) contentRef.current.style.transform = `translateY(${y * 0.06}px)`;
     };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      className="relative flex min-h-screen flex-col overflow-hidden"
-      style={{ background: "var(--color-canvas)" }}
+      style={{
+        position: "relative",
+        minHeight: "100svh",
+        background: "var(--color-canvas)",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
     >
-      {/* Subtle warm shape — parallax */}
-      <div
-        ref={bgRef}
-        aria-hidden
-        className="pointer-events-none absolute will-change-transform"
-        style={{
-          right: "-10%",
-          top: "5%",
-          width: "55vw",
-          height: "75vh",
-          borderRadius: "40% 60% 55% 45% / 50% 45% 55% 50%",
-          background: "var(--color-apricot)",
-          opacity: 0.45,
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute"
-        style={{
-          left: "5%",
-          bottom: "10%",
-          width: "28vw",
-          height: "28vw",
-          borderRadius: "50%",
-          background: "var(--color-mint)",
-          opacity: 0.55,
-        }}
-      />
+      {/* Background shapes — parallax */}
+      <div ref={shapeRef} aria-hidden style={{ position: "absolute", inset: 0, willChange: "transform" }}>
+        {/* Large cream rectangle */}
+        <div
+          style={{
+            position: "absolute",
+            right: "-5%",
+            top: "8%",
+            width: "46%",
+            height: "80%",
+            background: "var(--color-cream)",
+            borderRadius: 16,
+            opacity: 0.8,
+          }}
+        />
+        {/* Mint accent */}
+        <div
+          style={{
+            position: "absolute",
+            right: "18%",
+            bottom: "12%",
+            width: "22%",
+            height: "28%",
+            background: "var(--color-mint)",
+            borderRadius: 12,
+            opacity: 0.7,
+          }}
+        />
+        {/* Apricot circle */}
+        <div
+          style={{
+            position: "absolute",
+            left: "5%",
+            bottom: "15%",
+            width: 180,
+            height: 180,
+            background: "var(--color-apricot)",
+            borderRadius: "50%",
+            opacity: 0.5,
+          }}
+        />
+      </div>
 
-      {/* Top: wordmark + year */}
-      <div className="relative z-10 flex items-center justify-between px-8 pt-10 md:px-14">
+      {/* Top bar */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "28px 56px",
+        }}
+      >
         <span
           style={{
             fontFamily: "var(--font-lora-var), serif",
             fontWeight: 600,
             fontSize: 20,
             letterSpacing: "-0.03em",
-            color: "var(--color-navy)",
+            color: "#1B2B4B",
           }}
         >
           Pare
         </span>
-        <span
-          style={{
-            fontFamily: "var(--font-inter-var), sans-serif",
-            fontSize: 12,
-            color: "var(--color-muted)",
-            letterSpacing: "0.06em",
-          }}
-        >
-          Case Study · 2025
-        </span>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#2A9D8F" }}/>
+          <span
+            style={{
+              fontFamily: "var(--font-inter-var), sans-serif",
+              fontSize: 12,
+              color: "#8C9BAD",
+              letterSpacing: "0.06em",
+            }}
+          >
+            Case Study · 2025
+          </span>
+        </div>
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-1 flex-col justify-end px-8 pb-20 md:px-14 md:pb-24">
+      <div
+        ref={contentRef}
+        style={{
+          position: "relative",
+          zIndex: 2,
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          padding: "0 56px 52px",
+          willChange: "transform",
+        }}
+      >
         <h1
           style={{
             fontFamily: "var(--font-lora-var), serif",
             fontWeight: 600,
-            fontSize: "clamp(52px, 7.5vw, 96px)",
-            lineHeight: 1.02,
-            letterSpacing: "-0.03em",
-            color: "var(--color-navy)",
-            maxWidth: 820,
-            marginBottom: 32,
+            fontSize: "clamp(58px, 8.5vw, 108px)",
+            lineHeight: 1.0,
+            letterSpacing: "-0.035em",
+            color: "#1B2B4B",
+            maxWidth: "70vw",
+            marginBottom: 36,
           }}
         >
           Make the better<br />
           choice{" "}
-          <em
-            style={{ fontStyle: "italic", color: "var(--color-teal)" }}
-          >
-            feel easy.
-          </em>
+          <em style={{ fontStyle: "italic", color: "#2A9D8F" }}>feel easy.</em>
         </h1>
 
-        <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            gap: 32,
+            flexWrap: "wrap",
+          }}
+        >
           <p
             style={{
               fontFamily: "var(--font-inter-var), sans-serif",
               fontSize: 18,
               lineHeight: 1.65,
-              color: "var(--color-subtle)",
-              maxWidth: 420,
+              color: "#6B7A8A",
+              maxWidth: 400,
+              margin: 0,
             }}
           >
             Pare is a curated retailer for thoughtful, lower-waste everyday
             essentials — where sustainable choices are the easy default.
           </p>
 
-          <div className="flex flex-col items-start gap-6 md:items-end">
-            {/* Meta */}
-            <div className="flex gap-10">
-              {[
-                ["Role", "Product Design"],
-                ["Year", "2025"],
-                ["Scope", "App · Brand · Campaign"],
-              ].map(([k, v]) => (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 24 }}>
+            <div style={{ display: "flex", gap: 32 }}>
+              {[["Role", "Product Design"], ["Year", "2025"], ["Scope", "App · Brand · Campaign"]].map(([k, v]) => (
                 <div key={k}>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-inter-var), sans-serif",
-                      fontSize: 10,
-                      fontWeight: 500,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--color-muted)",
-                      marginBottom: 4,
-                    }}
-                  >
-                    {k}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-inter-var), sans-serif",
-                      fontSize: 13,
-                      fontWeight: 500,
-                      color: "var(--color-navy)",
-                    }}
-                  >
-                    {v}
-                  </p>
+                  <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 10, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C9BAD", marginBottom: 4 }}>{k}</p>
+                  <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, fontWeight: 500, color: "#1B2B4B" }}>{v}</p>
                 </div>
               ))}
             </div>
 
-            {/* Scroll CTA */}
             <a
               href="#overview"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={(e) => { e.preventDefault(); document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" }); }}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -161,7 +185,7 @@ export default function Hero() {
                 fontFamily: "var(--font-inter-var), sans-serif",
                 fontSize: 13,
                 fontWeight: 500,
-                color: "var(--color-teal)",
+                color: "#2A9D8F",
                 textDecoration: "none",
               }}
             >
@@ -173,12 +197,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Bottom rule */}
-      <div
-        className="relative z-10 mx-8 md:mx-14"
-        style={{ height: 1, background: "var(--color-border)" }}
-      />
     </header>
   );
 }

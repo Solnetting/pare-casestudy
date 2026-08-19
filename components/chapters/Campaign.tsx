@@ -326,7 +326,7 @@ const SYSTEM_RULES = [
 
 export default function Campaign() {
   return (
-    <section id="campaign" style={{ background: "var(--color-canvas)", padding: "120px 0" }}>
+    <section id="campaign" className="section-card" style={{ background: "var(--color-canvas)", padding: "120px 0" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
         <SectionReveal>

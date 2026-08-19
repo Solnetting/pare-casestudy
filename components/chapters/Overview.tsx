@@ -40,7 +40,7 @@ const S = {
 
 export default function Overview() {
   return (
-    <section id="overview" style={{ background: "var(--color-canvas)", padding: "120px 0" }}>
+    <section id="overview" className="section-card" style={{ background: "var(--color-canvas)", padding: "120px 0" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
         {/* Chapter marker */}

@@ -295,7 +295,7 @@ export default function Product() {
   ];
 
   return (
-    <section id="product" style={{ background: "white", padding: "120px 0" }}>
+    <section id="product" className="section-card" style={{ background: "white", padding: "120px 0" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
         <SectionReveal>

@@ -136,7 +136,7 @@ const COMPONENTS = [
 
 export default function DesignSystem() {
   return (
-    <section id="design-system" style={{ background: "var(--color-mint)", padding: "120px 0" }}>
+    <section id="design-system" className="section-card" style={{ background: "var(--color-mint)", padding: "120px 0" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
         <SectionReveal>

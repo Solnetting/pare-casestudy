@@ -22,7 +22,7 @@ const TONE = [
 
 export default function Brand() {
   return (
-    <section id="brand" style={{ background: "var(--color-cream)", padding: "120px 0" }}>
+    <section id="brand" className="section-card" style={{ background: "var(--color-cream)", padding: "120px 0" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
         <SectionReveal>

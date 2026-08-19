@@ -47,7 +47,7 @@ const NEXT = [
 
 export default function Reflection() {
   return (
-    <section id="reflection" style={{ background: "var(--color-navy)", padding: "120px 0" }}>
+    <section id="reflection" className="section-card" style={{ background: "var(--color-navy)", padding: "120px 0" }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
         <SectionReveal>

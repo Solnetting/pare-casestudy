@@ -21,9 +21,7 @@
   --text-6xl: 4rem;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -42,14 +40,21 @@ body {
   overflow-x: hidden;
 }
 
-[id] { scroll-margin-top: 72px; }
+/* Sections slide up over the previous — scroll-margin accounts for rounded top */
+[id] { scroll-margin-top: 100px; }
 
 :focus-visible {
   outline: 1.5px solid var(--color-teal);
   outline-offset: 3px;
 }
 
-/* Editorial section divider */
+/* Chapter section card — rounded top, overlaps previous */
+.section-card {
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+
+/* Editorial chapter divider */
 .chapter-rule {
   display: flex;
   align-items: center;
@@ -66,8 +71,8 @@ body {
 /* Reveal animation */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
 }
 .reveal.visible {
   opacity: 1;
@@ -82,7 +87,6 @@ body {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  cursor: grab;
 }
 .flow-scroll::-webkit-scrollbar { display: none; }
 
@@ -90,9 +94,6 @@ body {
 .frame-shadow {
   box-shadow:
     0 0 0 1px rgba(27,43,75,0.07),
-    0 16px 48px rgba(27,43,75,0.12),
-    0 4px 12px rgba(27,43,75,0.06);
+    0 20px 56px rgba(27,43,75,0.14),
+    0 4px 12px rgba(27,43,75,0.07);
 }
-
-/* Content max-width */
-.prose-col { max-width: 640px; }

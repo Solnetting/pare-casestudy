@@ -1,429 +1,275 @@
 import PhoneFrame from "@/components/ui/PhoneFrame";
 import SectionReveal from "@/components/ui/SectionReveal";
 
-/* ── Shared micro-components for screen content ── */
+/* ── Shared primitives ── */
+const T = {
+  body: { fontFamily: "var(--font-inter-var)", fontSize: 16, lineHeight: 1.7, color: "var(--color-subtle)" } as React.CSSProperties,
+  label: { fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: "var(--color-muted)" },
+};
 
-function BottomNav({ active = "home" }: { active?: "home" | "products" | "bag" | "profile" }) {
-  const items = [
-    { id: "home", label: "Home", icon: "M3 10.5L12 3l9 7.5V21H15v-6H9v6H3V10.5z" },
-    { id: "products", label: "Products", icon: "M4 6h16M4 12h16M4 18h16" },
-    { id: "bag", label: "Bag", icon: "M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" },
-    { id: "profile", label: "Profile", icon: "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" },
+function Nav({ active = "home" }: { active?: "home"|"products"|"bag"|"profile" }) {
+  const tabs = [
+    { id: "home", icon: "M3 9l4-4 4 4 4-4v12H7V13H4v5H1V9z", label: "Home" },
+    { id: "products", icon: "M4 6h10M4 10h10M4 14h6", label: "Products" },
+    { id: "bag", icon: "M6 2 3.5 6v11a1 1 0 001 1h9a1 1 0 001-1V6L12 2zM3.5 6h11M9 11a2 2 0 100-4 2 2 0 000 4z", label: "Bag" },
+    { id: "profile", icon: "M9 11a3 3 0 100-6 3 3 0 000 6zM3 19a6 6 0 0112 0", label: "Profile" },
   ];
   return (
-    <div
-      className="absolute bottom-0 left-0 right-0 flex border-t border-gray-100 bg-white"
-      style={{ height: 52 }}
-    >
-      {items.map((item) => (
-        <div
-          key={item.id}
-          className="flex flex-1 flex-col items-center justify-center gap-0.5"
-        >
-          <svg
-            width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke={active === item.id ? "#2A9D8F" : "#8A9BB5"}
-            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-          >
-            <path d={item.icon}/>
+    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, display: "flex", borderTop: "1px solid #F0EDE8", background: "white", height: 50, paddingBottom: 4 }}>
+      {tabs.map(t => (
+        <div key={t.id} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 2 }}>
+          <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke={active === t.id ? "#2A9D8F" : "#B8C3D0"} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+            <path d={t.icon}/>
           </svg>
-          <span
-            style={{
-              fontSize: 7,
-              fontFamily: "var(--font-inter-var), sans-serif",
-              fontWeight: active === item.id ? 600 : 400,
-              color: active === item.id ? "#2A9D8F" : "#8A9BB5",
-            }}
-          >
-            {item.label}
-          </span>
+          <span style={{ fontSize: 7.5, fontFamily: "var(--font-inter-var)", color: active === t.id ? "#2A9D8F" : "#B8C3D0", fontWeight: active === t.id ? 500 : 400 }}>{t.label}</span>
         </div>
       ))}
     </div>
   );
 }
 
-function RepeatBadge() {
-  return (
-    <span
-      className="inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5"
-      style={{ background: "#E8F5F3", fontSize: 7, fontWeight: 600, color: "#2A9D8F", fontFamily: "var(--font-inter-var), sans-serif" }}
-    >
-      <svg width="7" height="7" viewBox="0 0 14 14" fill="none">
-        <path d="M2 7a5 5 0 109.9-1M12 3v3h-3" stroke="#2A9D8F" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-      Repeat
-    </span>
-  );
-}
+/* ── Seven screens ── */
 
-/* ── Screen 1: Home ── */
 function HomeScreen() {
   return (
-    <div className="absolute inset-0 bg-white" style={{ top: 30, bottom: 52 }}>
+    <div style={{ height: "100%", background: "white" }}>
       {/* App bar */}
-      <div className="flex items-center justify-between px-4 py-2">
-        <span style={{ fontSize: 14, fontWeight: 700, color: "#1B2B4B", fontFamily: "var(--font-lora-var), serif" }}>
-          Pare
-        </span>
-        <div className="relative">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" strokeWidth="1.5">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/>
-          </svg>
-          <span className="absolute -right-1 -top-1 flex h-3 w-3 items-center justify-center rounded-full bg-pare-teal" style={{ fontSize: 6, color: "white" }}>2</span>
-        </div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "4px 14px 8px" }}>
+        <span style={{ fontFamily: "var(--font-lora-var)", fontSize: 15, fontWeight: 600, color: "#1B2B4B", letterSpacing: "-0.02em" }}>Pare</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" strokeWidth="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/></svg>
       </div>
-      {/* Campaign banner */}
-      <div className="mx-3 rounded-xl p-3" style={{ background: "#F5EDD8" }}>
-        <p style={{ fontSize: 7, fontWeight: 600, color: "#8A9BB5", textTransform: "uppercase", letterSpacing: "0.08em" }}>Campaign</p>
-        <p style={{ fontSize: 12, fontWeight: 600, color: "#1B2B4B", fontFamily: "var(--font-lora-var), serif", lineHeight: 1.3 }}>
-          The Home Reset
-        </p>
-        <p style={{ fontSize: 8, color: "#6B7B8D", marginTop: 2 }}>Shop the seasonal edit</p>
-        <div className="mt-2 inline-block rounded-full px-2.5 py-1" style={{ background: "#2A9D8F" }}>
-          <span style={{ fontSize: 8, color: "white", fontWeight: 600 }}>Explore</span>
+      {/* Hero banner */}
+      <div style={{ margin: "0 10px", borderRadius: 12, background: "#F4EBD6", padding: "14px 14px 14px" }}>
+        <p style={{ fontSize: 7, fontFamily: "var(--font-inter-var)", color: "#8C9BAD", textTransform: "uppercase", letterSpacing: "0.08em" }}>Spring campaign</p>
+        <p style={{ fontSize: 13, fontFamily: "var(--font-lora-var)", fontWeight: 600, color: "#1B2B4B", lineHeight: 1.2, marginTop: 3 }}>The Home Reset</p>
+        <div style={{ marginTop: 8, display: "inline-block", background: "#2A9D8F", borderRadius: 4, padding: "4px 10px" }}>
+          <span style={{ fontSize: 8, color: "white", fontWeight: 600, fontFamily: "var(--font-inter-var)" }}>Explore</span>
         </div>
       </div>
       {/* Categories */}
-      <div className="mt-2 flex gap-1.5 overflow-x-auto px-3 pb-1 scrollbar-none">
+      <div style={{ display: "flex", gap: 6, padding: "10px 10px 0", overflowX: "hidden" }}>
         {["Kitchen", "Bathroom", "Living", "Care"].map((c, i) => (
-          <span
-            key={c}
-            className="flex-shrink-0 rounded-full px-2.5 py-1"
-            style={{
-              background: i === 0 ? "#1B2B4B" : "#F5EDD8",
-              color: i === 0 ? "white" : "#1B2B4B",
-              fontSize: 8,
-              fontWeight: 500,
-            }}
-          >
-            {c}
-          </span>
+          <span key={c} style={{ flexShrink: 0, background: i === 0 ? "#1B2B4B" : "#F4EBD6", color: i === 0 ? "white" : "#1B2B4B", fontSize: 8, fontWeight: 500, padding: "4px 10px", borderRadius: 4 }}>{c}</span>
         ))}
       </div>
-      {/* Products strip */}
-      <div className="mt-2 px-3">
-        <p style={{ fontSize: 8, fontWeight: 600, color: "#8A9BB5", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
-          Essentials, restocked
-        </p>
-        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-          {[
-            { name: "Dish Soap", price: "£8.99", repeat: true },
-            { name: "Hand Towels", price: "£14.99", repeat: false },
-            { name: "Laundry Sheets", price: "£11.99", repeat: true },
-          ].map((p) => (
-            <div key={p.name} className="flex-shrink-0 rounded-xl border border-gray-100 bg-gray-50 p-1.5" style={{ width: 74 }}>
-              <div className="flex h-12 items-center justify-center rounded-lg bg-white">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4EDE9" strokeWidth="1">
-                  <rect x="4" y="4" width="16" height="16" rx="2"/>
-                </svg>
-              </div>
-              <p style={{ fontSize: 8, fontWeight: 600, color: "#1B2B4B", marginTop: 4, lineHeight: 1.2 }}>{p.name}</p>
-              <p style={{ fontSize: 9, color: "#2A9D8F", fontWeight: 700 }}>{p.price}</p>
-              {p.repeat && <RepeatBadge />}
-            </div>
-          ))}
-        </div>
+      {/* Products */}
+      <p style={{ fontSize: 8, fontWeight: 500, color: "#8C9BAD", textTransform: "uppercase", letterSpacing: "0.08em", padding: "10px 10px 6px" }}>Essentials</p>
+      <div style={{ display: "flex", gap: 6, padding: "0 10px", overflowX: "hidden" }}>
+        {[{ n: "Dish Soap", p: "£8.99", r: true, bg: "#F4EBD6" }, { n: "Towels", p: "£14.99", r: false, bg: "#E2F0EE" }, { n: "Laundry", p: "£11.99", r: true, bg: "#FAE5D3" }].map(item => (
+          <div key={item.n} style={{ flexShrink: 0, width: 68, borderRadius: 8, border: "1px solid #F0EDE8", padding: 6 }}>
+            <div style={{ height: 44, borderRadius: 6, background: item.bg, marginBottom: 5 }}/>
+            <p style={{ fontSize: 8, fontWeight: 600, color: "#1B2B4B", lineHeight: 1.2 }}>{item.n}</p>
+            <p style={{ fontSize: 9, color: "#2A9D8F", fontWeight: 700 }}>{item.p}</p>
+            {item.r && <span style={{ fontSize: 7, color: "#2A9D8F", fontWeight: 600, background: "#E2F0EE", padding: "1px 5px", borderRadius: 3 }}>Repeat</span>}
+          </div>
+        ))}
       </div>
-      <BottomNav active="home" />
+      <Nav active="home"/>
     </div>
   );
 }
 
-/* ── Screen 2: Category / Campaign browse ── */
 function CategoryScreen() {
   return (
-    <div className="absolute inset-0 bg-white" style={{ top: 30, bottom: 52 }}>
-      <div className="flex items-center gap-2 px-4 py-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" strokeWidth="1.5" strokeLinecap="round">
-          <path d="M19 12H5M12 5l-7 7 7 7"/>
-        </svg>
-        <span style={{ fontSize: 13, fontWeight: 700, color: "#1B2B4B", fontFamily: "var(--font-lora-var), serif" }}>Kitchen</span>
+    <div style={{ height: "100%", background: "white" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "4px 14px 8px" }}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" strokeWidth="1.5" strokeLinecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <span style={{ fontSize: 13, fontFamily: "var(--font-lora-var)", fontWeight: 600, color: "#1B2B4B" }}>Kitchen</span>
       </div>
-      <div className="flex gap-1.5 px-4 pb-2">
-        {["All", "Cleaning", "Storage", "Cooking"].map((c, i) => (
-          <span
-            key={c}
-            className="flex-shrink-0 rounded-full px-2 py-0.5"
-            style={{ background: i === 0 ? "#2A9D8F" : "#F5EDD8", color: i === 0 ? "white" : "#1B2B4B", fontSize: 7.5, fontWeight: 500 }}
-          >
-            {c}
-          </span>
+      <div style={{ display: "flex", gap: 5, padding: "0 10px 8px" }}>
+        {["All", "Cleaning", "Storage"].map((c, i) => (
+          <span key={c} style={{ background: i === 0 ? "#2A9D8F" : "#F4EBD6", color: i === 0 ? "white" : "#1B2B4B", fontSize: 7.5, fontWeight: 500, padding: "4px 10px", borderRadius: 4 }}>{c}</span>
         ))}
       </div>
-      <div className="grid grid-cols-2 gap-2 px-3">
-        {[
-          { name: "Dish Soap Refillable", price: "£8.99", repeat: true, surface: "#F5EDD8" },
-          { name: "Glass Spray Bottle", price: "£12.99", repeat: false, surface: "#D4EDE9" },
-          { name: "Laundry Sheets", price: "£11.99", repeat: true, surface: "#FAE5D3" },
-          { name: "Beeswax Wrap Set", price: "£9.99", repeat: false, surface: "#F5EDD8" },
-        ].map((p) => (
-          <div key={p.name} className="rounded-xl border border-gray-100 bg-white p-2">
-            <div className="flex h-16 items-center justify-center rounded-lg" style={{ background: p.surface }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1">
-                <rect x="4" y="4" width="16" height="16" rx="3"/>
-              </svg>
-            </div>
-            <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B", marginTop: 4, lineHeight: 1.25 }}>{p.name}</p>
-            <div className="flex items-center justify-between mt-0.5">
-              <p style={{ fontSize: 10, color: "#2A9D8F", fontWeight: 700 }}>{p.price}</p>
-              {p.repeat && <RepeatBadge />}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, padding: "0 10px" }}>
+        {[{ n: "Dish Soap Refillable", p: "£8.99", r: true, bg: "#F4EBD6" }, { n: "Glass Spray Bottle", p: "£12.99", r: false, bg: "#E2F0EE" }, { n: "Laundry Sheets", p: "£11.99", r: true, bg: "#FAE5D3" }, { n: "Beeswax Wrap", p: "£9.99", r: false, bg: "#F4EBD6" }].map(item => (
+          <div key={item.n} style={{ borderRadius: 8, border: "1px solid #F0EDE8", padding: 8 }}>
+            <div style={{ height: 52, borderRadius: 6, background: item.bg, marginBottom: 6 }}/>
+            <p style={{ fontSize: 8.5, fontWeight: 600, color: "#1B2B4B", lineHeight: 1.2, marginBottom: 3 }}>{item.n}</p>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <p style={{ fontSize: 10, color: "#2A9D8F", fontWeight: 700 }}>{item.p}</p>
+              {item.r && <span style={{ fontSize: 7, color: "#2A9D8F", fontWeight: 600, background: "#E2F0EE", padding: "1px 5px", borderRadius: 3 }}>Repeat</span>}
             </div>
           </div>
         ))}
       </div>
-      <BottomNav active="products" />
+      <Nav active="products"/>
     </div>
   );
 }
 
-/* ── Screen 3: Products / Search ── */
 function ProductsScreen() {
   return (
-    <div className="absolute inset-0 bg-white" style={{ top: 30, bottom: 52 }}>
-      <div className="px-3 pt-2 pb-1.5">
-        <div className="flex items-center gap-2 rounded-xl border border-gray-100 bg-gray-50 px-3 py-2">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A9BB5" strokeWidth="1.5">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-          <span style={{ fontSize: 10, color: "#8A9BB5" }}>Search products…</span>
+    <div style={{ height: "100%", background: "white" }}>
+      <div style={{ padding: "4px 10px 8px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#F8F6F2", borderRadius: 8, padding: "8px 12px" }}>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#8C9BAD" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span style={{ fontSize: 10, color: "#8C9BAD", fontFamily: "var(--font-inter-var)" }}>Search products…</span>
         </div>
       </div>
-      <div className="flex gap-1.5 px-3 pb-2 overflow-x-auto scrollbar-none">
-        {["All", "Kitchen", "Bathroom", "Living", "Care"].map((c, i) => (
-          <span key={c} className="flex-shrink-0 rounded-full px-2.5 py-1"
-            style={{ background: i === 0 ? "#1B2B4B" : "#FAF8F5", color: i === 0 ? "white" : "#1B2B4B", fontSize: 7.5, fontWeight: 500, border: i !== 0 ? "1px solid #E8E2D9" : "none" }}>
-            {c}
-          </span>
+      <div style={{ display: "flex", gap: 5, padding: "0 10px 8px", overflowX: "hidden" }}>
+        {["All", "Kitchen", "Bath", "Living"].map((c, i) => (
+          <span key={c} style={{ flexShrink: 0, background: i === 0 ? "#1B2B4B" : "transparent", color: i === 0 ? "white" : "#1B2B4B", fontSize: 7.5, fontWeight: 500, padding: "4px 10px", borderRadius: 4, border: i !== 0 ? "1px solid #E4DDD4" : "none" }}>{c}</span>
         ))}
       </div>
-      <div className="grid grid-cols-2 gap-2 px-3 pb-2">
-        {[
-          { name: "Dish Soap", price: "£8.99", repeat: true, bg: "#F5EDD8" },
-          { name: "Laundry Sheets", price: "£11.99", repeat: true, bg: "#D4EDE9" },
-          { name: "Glass Bottle", price: "£12.99", repeat: false, bg: "#FAE5D3" },
-          { name: "Bamboo Towels", price: "£14.99", repeat: false, bg: "#F5EDD8" },
-        ].map((p) => (
-          <div key={p.name} className="rounded-xl border border-gray-100 p-2">
-            <div className="flex h-16 items-center justify-center rounded-lg" style={{ background: p.bg }} />
-            <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B", marginTop: 4, lineHeight: 1.25 }}>{p.name}</p>
-            <div className="flex items-center justify-between mt-0.5">
-              <span style={{ fontSize: 10, color: "#2A9D8F", fontWeight: 700 }}>{p.price}</span>
-              {p.repeat && <RepeatBadge />}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, padding: "0 10px" }}>
+        {[{ n: "Dish Soap", p: "£8.99", r: true, bg: "#F4EBD6" }, { n: "Laundry Sheets", p: "£11.99", r: true, bg: "#E2F0EE" }, { n: "Glass Bottle", p: "£12.99", r: false, bg: "#FAE5D3" }, { n: "Bamboo Towels", p: "£14.99", r: false, bg: "#F4EBD6" }].map(item => (
+          <div key={item.n} style={{ borderRadius: 8, border: "1px solid #F0EDE8", padding: 8 }}>
+            <div style={{ height: 52, borderRadius: 6, background: item.bg, marginBottom: 6 }}/>
+            <p style={{ fontSize: 8.5, fontWeight: 600, color: "#1B2B4B", lineHeight: 1.2, marginBottom: 3 }}>{item.n}</p>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <p style={{ fontSize: 10, color: "#2A9D8F", fontWeight: 700 }}>{item.p}</p>
+              {item.r && <span style={{ fontSize: 7, color: "#2A9D8F", fontWeight: 600, background: "#E2F0EE", padding: "1px 5px", borderRadius: 3 }}>Repeat</span>}
             </div>
           </div>
         ))}
       </div>
-      <BottomNav active="products" />
+      <Nav active="products"/>
     </div>
   );
 }
 
-/* ── Screen 4: Product Detail ── */
-function ProductDetailScreen() {
+function DetailScreen() {
   return (
-    <div className="absolute inset-0 bg-white" style={{ top: 30, bottom: 52 }}>
-      <div className="flex items-center gap-2 px-4 py-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" strokeWidth="1.5" strokeLinecap="round">
-          <path d="M19 12H5M12 5l-7 7 7 7"/>
-        </svg>
-        <span style={{ fontSize: 11, color: "#8A9BB5" }}>Kitchen</span>
+    <div style={{ height: "100%", background: "white" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 14px 8px" }}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" strokeWidth="1.5" strokeLinecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <span style={{ fontSize: 10, color: "#8C9BAD", fontFamily: "var(--font-inter-var)" }}>Kitchen</span>
       </div>
-      {/* Product image */}
-      <div className="mx-3 flex h-28 items-center justify-center rounded-xl" style={{ background: "#F5EDD8" }}>
-        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-          <rect x="8" y="8" width="32" height="32" rx="8" fill="white"/>
-          <rect x="14" y="14" width="20" height="20" rx="4" fill="#D4EDE9"/>
-        </svg>
+      <div style={{ margin: "0 10px", height: 100, borderRadius: 8, background: "#F4EBD6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 40, height: 40, borderRadius: 6, background: "white" }}/>
       </div>
-      {/* Product info */}
-      <div className="mt-3 px-4">
-        <p style={{ fontSize: 13, fontWeight: 700, color: "#1B2B4B", fontFamily: "var(--font-lora-var), serif" }}>
-          Refillable Dish Soap
-        </p>
-        <p style={{ fontSize: 9, color: "#8A9BB5", marginTop: 2 }}>500ml · Concentrated formula</p>
-        {/* Proof labels */}
-        <div className="mt-2 flex gap-1.5 flex-wrap">
-          {["Refillable", "B Corp", "Vegan"].map((l) => (
-            <span key={l} className="rounded-full px-2 py-0.5"
-              style={{ background: "#E8F5F3", color: "#2A9D8F", fontSize: 7.5, fontWeight: 600 }}>
-              {l}
-            </span>
+      <div style={{ padding: "12px 14px 0" }}>
+        <p style={{ fontSize: 13, fontFamily: "var(--font-lora-var)", fontWeight: 600, color: "#1B2B4B" }}>Refillable Dish Soap</p>
+        <p style={{ fontSize: 9, color: "#8C9BAD", marginTop: 2 }}>500ml · Concentrated formula</p>
+        <div style={{ display: "flex", gap: 5, marginTop: 8 }}>
+          {["Refillable", "B Corp", "Vegan"].map(l => (
+            <span key={l} style={{ fontSize: 7.5, color: "#2A9D8F", fontWeight: 500, background: "#E2F0EE", padding: "2px 7px", borderRadius: 3 }}>{l}</span>
           ))}
         </div>
-        <div className="mt-3 h-px bg-gray-100" />
-        {/* Pricing */}
-        <div className="mt-3 flex items-end justify-between">
+        <div style={{ borderTop: "1px solid #F0EDE8", marginTop: 10, paddingTop: 10, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <div>
             <p style={{ fontSize: 16, fontWeight: 700, color: "#1B2B4B" }}>£8.99</p>
-            <p style={{ fontSize: 9, color: "#8A9BB5" }}>One-time</p>
+            <p style={{ fontSize: 8, color: "#8C9BAD" }}>One-time</p>
           </div>
-          <div className="text-right">
+          <div style={{ textAlign: "right" }}>
             <p style={{ fontSize: 14, fontWeight: 700, color: "#2A9D8F" }}>£8.09</p>
-            <p style={{ fontSize: 9, color: "#8A9BB5" }}>Every 30 days · save 10%</p>
+            <p style={{ fontSize: 8, color: "#8C9BAD" }}>Every 30 days · save 10%</p>
           </div>
         </div>
       </div>
-      <BottomNav active="products" />
+      <Nav active="products"/>
     </div>
   );
 }
 
-/* ── Screen 5: Purchase Mode ── */
-function PurchaseModeScreen() {
+function PurchaseScreen() {
   return (
-    <div className="absolute inset-0 bg-white" style={{ top: 30, bottom: 52 }}>
-      <div className="px-4 pt-2">
-        <p style={{ fontSize: 11, fontWeight: 700, color: "#1B2B4B", fontFamily: "var(--font-lora-var), serif" }}>
-          Refillable Dish Soap
-        </p>
-        <p style={{ fontSize: 9, color: "#8A9BB5" }}>Choose how you buy</p>
+    <div style={{ height: "100%", background: "white" }}>
+      <div style={{ padding: "4px 14px 10px" }}>
+        <p style={{ fontSize: 12, fontFamily: "var(--font-lora-var)", fontWeight: 600, color: "#1B2B4B" }}>Refillable Dish Soap</p>
+        <p style={{ fontSize: 9, color: "#8C9BAD" }}>Choose how you buy</p>
       </div>
-      {/* Mode toggle */}
-      <div className="mx-3 mt-3 flex rounded-xl border border-gray-100 bg-gray-50 p-0.5">
-        <button className="flex-1 rounded-lg py-1.5 text-center" style={{ fontSize: 9, fontWeight: 600, color: "#8A9BB5" }}>
-          One-time
-        </button>
-        <button className="flex-1 rounded-lg py-1.5 text-center" style={{ background: "#1B2B4B", fontSize: 9, fontWeight: 600, color: "white" }}>
-          Repeat
-        </button>
+      {/* Toggle */}
+      <div style={{ margin: "0 10px", display: "flex", background: "#F8F6F2", borderRadius: 6, padding: 2 }}>
+        <button style={{ flex: 1, borderRadius: 4, padding: "6px 0", fontSize: 9, fontWeight: 400, color: "#8C9BAD", background: "transparent", border: "none" }}>One-time</button>
+        <button style={{ flex: 1, borderRadius: 4, padding: "6px 0", fontSize: 9, fontWeight: 600, color: "white", background: "#1B2B4B", border: "none" }}>Repeat</button>
       </div>
       {/* Repeat card */}
-      <div className="mx-3 mt-3 rounded-xl border border-teal-100 p-3" style={{ background: "#E8F5F3" }}>
-        <div className="flex items-start justify-between">
+      <div style={{ margin: "10px 10px 0", borderRadius: 8, background: "#E2F0EE", padding: 12 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div>
-            <p style={{ fontSize: 16, fontWeight: 700, color: "#2A9D8F" }}>£8.09</p>
-            <p style={{ fontSize: 8, color: "#6B7B8D" }}>per delivery</p>
+            <p style={{ fontSize: 18, fontWeight: 700, color: "#2A9D8F" }}>£8.09</p>
+            <p style={{ fontSize: 8, color: "#6B7A8A" }}>per delivery</p>
           </div>
-          <span className="rounded-full px-2 py-0.5"
-            style={{ background: "#2A9D8F", color: "white", fontSize: 8, fontWeight: 600 }}>
-            Save 10%
-          </span>
+          <span style={{ background: "#2A9D8F", color: "white", fontSize: 8, fontWeight: 600, padding: "3px 8px", borderRadius: 4 }}>Save 10%</span>
         </div>
-        <div className="mt-2 h-px" style={{ background: "#C8E8E4" }} />
-        <div className="mt-2 flex justify-between">
-          <p style={{ fontSize: 9, color: "#6B7B8D" }}>Frequency</p>
-          <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B" }}>Every 30 days ↓</p>
+        <div style={{ borderTop: "1px solid rgba(42,157,143,0.2)", marginTop: 8, paddingTop: 8, display: "flex", justifyContent: "space-between" }}>
+          <p style={{ fontSize: 9, color: "#6B7A8A" }}>Frequency</p>
+          <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B" }}>Every 30 days</p>
         </div>
-        <div className="mt-1 flex justify-between">
-          <p style={{ fontSize: 9, color: "#6B7B8D" }}>Annual saving</p>
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
+          <p style={{ fontSize: 9, color: "#6B7A8A" }}>Annual saving</p>
           <p style={{ fontSize: 9, fontWeight: 600, color: "#2A9D8F" }}>~£10.80</p>
         </div>
       </div>
-      {/* Add button */}
-      <div className="mx-3 mt-4">
-        <button className="w-full rounded-full py-2" style={{ background: "#2A9D8F" }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "white" }}>Add to repeat order</span>
-        </button>
+      <div style={{ margin: "10px 10px 0" }}>
+        <button style={{ width: "100%", borderRadius: 6, padding: "10px 0", background: "#2A9D8F", border: "none", color: "white", fontSize: 11, fontWeight: 600, fontFamily: "var(--font-inter-var)" }}>Add to repeat order</button>
       </div>
-      <BottomNav active="products" />
+      <Nav active="products"/>
     </div>
   );
 }
 
-/* ── Screen 6: Cart ── */
 function CartScreen() {
   return (
-    <div className="absolute inset-0 bg-white" style={{ top: 30, bottom: 52 }}>
-      <div className="px-4 pt-2 pb-2 flex items-center justify-between">
-        <p style={{ fontSize: 14, fontWeight: 700, color: "#1B2B4B", fontFamily: "var(--font-lora-var), serif" }}>
-          Your Bag
-        </p>
-        <span style={{ fontSize: 10, color: "#8A9BB5" }}>3 items</span>
+    <div style={{ height: "100%", background: "white" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 14px 10px" }}>
+        <p style={{ fontSize: 13, fontFamily: "var(--font-lora-var)", fontWeight: 600, color: "#1B2B4B" }}>Your Bag</p>
+        <span style={{ fontSize: 10, color: "#8C9BAD" }}>3 items</span>
       </div>
-      <div className="flex flex-col gap-2 px-3">
-        {[
-          { name: "Dish Soap Refillable", price: "£8.09", repeat: true },
-          { name: "Bamboo Hand Towels", price: "£14.99", repeat: false },
-          { name: "Laundry Sheets ×2", price: "£23.98", repeat: true },
-        ].map((item) => (
-          <div key={item.name} className="flex items-center gap-2 rounded-xl border border-gray-100 p-2">
-            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg" style={{ background: "#FAF8F5" }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4EDE9" strokeWidth="1.5">
-                <rect x="4" y="4" width="16" height="16" rx="3"/>
-              </svg>
-            </div>
-            <div className="flex-1 min-w-0">
-              <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B", lineHeight: 1.2 }}>{item.name}</p>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <p style={{ fontSize: 10, fontWeight: 700, color: "#2A9D8F" }}>{item.price}</p>
-                {item.repeat && <RepeatBadge />}
+      <div style={{ padding: "0 10px", display: "flex", flexDirection: "column", gap: 6 }}>
+        {[{ n: "Dish Soap Refillable", p: "£8.09", r: true }, { n: "Bamboo Hand Towels", p: "£14.99", r: false }, { n: "Laundry Sheets ×2", p: "£23.98", r: true }].map(item => (
+          <div key={item.n} style={{ display: "flex", gap: 8, borderRadius: 8, border: "1px solid #F0EDE8", padding: 8, alignItems: "center" }}>
+            <div style={{ width: 36, height: 36, borderRadius: 6, background: "#F8F6F2", flexShrink: 0 }}/>
+            <div style={{ flex: 1 }}>
+              <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B", lineHeight: 1.2 }}>{item.n}</p>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 3 }}>
+                <p style={{ fontSize: 10, fontWeight: 700, color: "#2A9D8F" }}>{item.p}</p>
+                {item.r && <span style={{ fontSize: 7, color: "#2A9D8F", fontWeight: 600, background: "#E2F0EE", padding: "1px 5px", borderRadius: 3 }}>Repeat</span>}
               </div>
             </div>
           </div>
         ))}
       </div>
-      <div className="mx-3 mt-3 flex justify-between items-center">
-        <p style={{ fontSize: 10, color: "#6B7B8D" }}>
-          <span style={{ textDecoration: "underline", textDecorationColor: "#2A9D8F" }}>Continue shopping</span>
-        </p>
-        <p style={{ fontSize: 11, fontWeight: 700, color: "#1B2B4B" }}>£47.06</p>
+      <div style={{ padding: "10px 14px 0", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontSize: 10, color: "#2A9D8F", fontWeight: 500, textDecoration: "underline" }}>Continue shopping</span>
+        <span style={{ fontSize: 11, fontWeight: 700, color: "#1B2B4B" }}>£47.06</span>
       </div>
-      <div className="mx-3 mt-2">
-        <button className="w-full rounded-full py-2" style={{ background: "#2A9D8F" }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "white" }}>Checkout</span>
-        </button>
+      <div style={{ margin: "8px 10px 0" }}>
+        <button style={{ width: "100%", borderRadius: 6, padding: "10px 0", background: "#2A9D8F", border: "none", color: "white", fontSize: 11, fontWeight: 600, fontFamily: "var(--font-inter-var)" }}>Checkout</button>
       </div>
-      <BottomNav active="bag" />
+      <Nav active="bag"/>
     </div>
   );
 }
 
-/* ── Screen 7: Checkout ── */
 function CheckoutScreen() {
   return (
-    <div className="absolute inset-0 bg-white" style={{ top: 30, bottom: 12 }}>
-      <div className="px-4 pt-2 pb-3 border-b border-gray-100">
-        <p style={{ fontSize: 14, fontWeight: 700, color: "#1B2B4B", fontFamily: "var(--font-lora-var), serif" }}>
-          Checkout
-        </p>
+    <div style={{ height: "100%", background: "white", display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "4px 14px 10px", borderBottom: "1px solid #F0EDE8" }}>
+        <p style={{ fontSize: 13, fontFamily: "var(--font-lora-var)", fontWeight: 600, color: "#1B2B4B" }}>Checkout</p>
       </div>
-      <div className="px-4 pt-3 flex flex-col gap-3">
-        {/* Order summary */}
-        <div className="rounded-xl bg-gray-50 p-2.5">
-          <p style={{ fontSize: 8, fontWeight: 600, color: "#8A9BB5", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
-            Order summary
-          </p>
-          <div className="flex justify-between">
-            <p style={{ fontSize: 9, color: "#6B7B8D" }}>3 items</p>
+      <div style={{ flex: 1, padding: "10px 10px 0", display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ background: "#F8F6F2", borderRadius: 8, padding: 10 }}>
+          <p style={{ fontSize: 8, fontWeight: 500, color: "#8C9BAD", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>Order</p>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <p style={{ fontSize: 9, color: "#6B7A8A" }}>3 items</p>
             <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B" }}>£47.06</p>
           </div>
-          <div className="flex justify-between mt-1">
-            <p style={{ fontSize: 9, color: "#2A9D8F" }}>Repeat savings</p>
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: 3 }}>
+            <p style={{ fontSize: 9, color: "#2A9D8F" }}>Repeat saving</p>
             <p style={{ fontSize: 9, fontWeight: 600, color: "#2A9D8F" }}>−£2.12</p>
           </div>
-          <div className="mt-2 pt-2 border-t border-gray-100 flex justify-between">
+          <div style={{ borderTop: "1px solid #E4DDD4", marginTop: 6, paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
             <p style={{ fontSize: 10, fontWeight: 700, color: "#1B2B4B" }}>Total</p>
             <p style={{ fontSize: 10, fontWeight: 700, color: "#1B2B4B" }}>£44.94</p>
           </div>
         </div>
-        {/* Delivery */}
-        <div>
-          <p style={{ fontSize: 8, fontWeight: 600, color: "#8A9BB5", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
-            Delivery
-          </p>
-          <div className="rounded-xl border border-gray-100 p-2.5">
-            <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B" }}>Alex Turner</p>
-            <p style={{ fontSize: 9, color: "#8A9BB5" }}>12 Grove Street, London</p>
-          </div>
+        <div style={{ borderRadius: 8, border: "1px solid #F0EDE8", padding: 10 }}>
+          <p style={{ fontSize: 8, fontWeight: 500, color: "#8C9BAD", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>Delivery</p>
+          <p style={{ fontSize: 9, fontWeight: 600, color: "#1B2B4B" }}>Alex Turner</p>
+          <p style={{ fontSize: 9, color: "#8C9BAD" }}>12 Grove Street, London</p>
         </div>
-        {/* Payment */}
-        <div>
-          <p style={{ fontSize: 8, fontWeight: 600, color: "#8A9BB5", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
-            Payment
-          </p>
-          <div className="flex items-center gap-2 rounded-xl border border-gray-100 p-2.5">
-            <div className="h-5 w-8 rounded bg-gray-200 flex items-center justify-center">
-              <span style={{ fontSize: 6, fontWeight: 700, color: "#6B7B8D" }}>VISA</span>
-            </div>
-            <p style={{ fontSize: 9, color: "#1B2B4B" }}>•••• 4242</p>
+        <div style={{ borderRadius: 8, border: "1px solid #F0EDE8", padding: 10, display: "flex", gap: 8, alignItems: "center" }}>
+          <div style={{ height: 20, width: 32, borderRadius: 3, background: "#E4DDD4", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ fontSize: 7, fontWeight: 700, color: "#6B7A8A" }}>VISA</span>
           </div>
+          <p style={{ fontSize: 9, color: "#1B2B4B" }}>•••• 4242</p>
         </div>
       </div>
-      <div className="mx-3 mt-3">
-        <button className="w-full rounded-full py-2" style={{ background: "#2A9D8F" }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "white" }}>Place order · £44.94</span>
-        </button>
+      <div style={{ padding: "8px 10px 10px" }}>
+        <button style={{ width: "100%", borderRadius: 6, padding: "10px 0", background: "#2A9D8F", border: "none", color: "white", fontSize: 11, fontWeight: 600, fontFamily: "var(--font-inter-var)" }}>Place order · £44.94</button>
       </div>
     </div>
   );
@@ -431,110 +277,95 @@ function CheckoutScreen() {
 
 /* ── Decisions ── */
 const DECISIONS = [
-  {
-    label: "Search lives in Products",
-    body: "Rather than a global search icon in the main nav, search is scoped within the Products tab. This aligns the entry point with the intent — people searching want to browse, not navigate.",
-  },
-  {
-    label: "Repeat only where relevant",
-    body: "One-time products never show Repeat messaging. Adding the mental model only when it applies reduces noise and avoids false expectations.",
-  },
-  {
-    label: "Cart as a rest stop, not a dead end",
-    body: "The cart keeps 'Continue shopping' visible without burying the checkout CTA. Stopping a purchase should feel easy so users don't feel pressure that erodes trust.",
-  },
-  {
-    label: "Bottom nav: four tabs, nothing hidden",
-    body: "Home, Products, Bag, Profile. Every primary journey can be reached in one tap. Profile replaces a 'More' overflow, keeping navigation predictable.",
-  },
+  { label: "Search lives in Products, not the global bar", body: "Search is a browsing act, not a navigation act. Scoping it to Products aligns the entry point with the intent and removes a redundant persistent element from the nav." },
+  { label: "Repeat only where it makes sense", body: "One-time products never show Repeat messaging. Adding the mental model only when it applies reduces noise and prevents false expectations." },
+  { label: "Cart keeps 'Continue shopping' visible", body: "Removing the exit from a cart puts pressure on users. Pare's audience is deliberate — giving them an easy off-ramp respects their pace and reinforces brand tone." },
+  { label: "Four tabs, nothing hidden", body: "Home, Products, Bag, Profile. Every primary journey in one tap. Replacing 'More' with Profile keeps navigation explicit and predictable." },
 ];
 
-/* ── Main component ── */
 export default function Product() {
-  const SCREENS = [
-    { label: "Home", screen: <HomeScreen /> },
-    { label: "Category", screen: <CategoryScreen /> },
-    { label: "Products", screen: <ProductsScreen /> },
-    { label: "Product detail", screen: <ProductDetailScreen /> },
-    { label: "Purchase mode", screen: <PurchaseModeScreen /> },
-    { label: "Cart", screen: <CartScreen /> },
-    { label: "Checkout", screen: <CheckoutScreen /> },
+  const SCREENS: { label: string; screen: React.ReactNode }[] = [
+    { label: "Home",          screen: <HomeScreen /> },
+    { label: "Category",      screen: <CategoryScreen /> },
+    { label: "Products",      screen: <ProductsScreen /> },
+    { label: "Product detail",screen: <DetailScreen /> },
+    { label: "Purchase mode", screen: <PurchaseScreen /> },
+    { label: "Cart",          screen: <CartScreen /> },
+    { label: "Checkout",      screen: <CheckoutScreen /> },
   ];
 
   return (
-    <section id="product" className="bg-white py-28 px-6">
-      <div className="mx-auto max-w-6xl">
+    <section id="product" style={{ background: "white", padding: "120px 0" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
-        {/* Chapter header */}
         <SectionReveal>
-          <div className="mb-16">
-            <p className="chapter-label mb-3">02 — Product</p>
-            <h2
-              className="font-lora font-semibold text-pare-navy"
-              style={{ fontSize: 48, lineHeight: 1.1, letterSpacing: "-0.02em", maxWidth: 560 }}
-            >
-              The mobile app, as one connected flow.
-            </h2>
-            <p className="mt-4 font-inter text-pare-subtle" style={{ fontSize: 16, lineHeight: 1.6, maxWidth: 520 }}>
-              Every screen in the purchase journey, from the editorial home feed
-              through to the order placed. No dead ends, no orphaned states.
-            </p>
+          <div className="chapter-rule">
+            <span style={T.label}>02</span>
+            <span style={T.label}>Product</span>
           </div>
-        </SectionReveal>
-
-        {/* Phone flow — horizontal scroll */}
-        <SectionReveal delay={80}>
-          <div className="scroll-row pb-8">
-            <div className="flex items-start gap-3 pb-4" style={{ minWidth: "max-content" }}>
-              {SCREENS.map((s, i) => (
-                <div key={s.label} className="flex items-center gap-3">
-                  <PhoneFrame label={s.label} className="flex-shrink-0">
-                    <div className="relative w-full h-full">
-                      {s.screen}
-                    </div>
-                  </PhoneFrame>
-                  {i < SCREENS.length - 1 && (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 mt-44">
-                      <path d="M5 12h14M13 6l6 6-6 6" stroke="#D4EDE9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </SectionReveal>
-
-        {/* Key decisions */}
-        <SectionReveal delay={100}>
-          <div className="mt-12">
-            <p className="chapter-label mb-8">Key product decisions</p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {DECISIONS.map((d, i) => (
-                <div
-                  key={d.label}
-                  className="flex gap-4 rounded-2xl border border-pare-border bg-pare-canvas p-6"
-                >
-                  <span
-                    className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full font-inter font-semibold text-white"
-                    style={{ background: "#2A9D8F", fontSize: 12 }}
-                  >
-                    {i + 1}
-                  </span>
-                  <div>
-                    <p className="font-inter font-semibold text-pare-navy" style={{ fontSize: 14, marginBottom: 6 }}>
-                      {d.label}
-                    </p>
-                    <p className="font-inter text-pare-subtle" style={{ fontSize: 13, lineHeight: 1.6 }}>
-                      {d.body}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-lora-var)",
+              fontWeight: 600,
+              fontSize: "clamp(40px, 5vw, 56px)",
+              lineHeight: 1.06,
+              letterSpacing: "-0.02em",
+              color: "var(--color-navy)",
+              maxWidth: 560,
+            }}
+          >
+            The app, as one connected flow.
+          </h2>
+          <p style={{ ...T.body, marginTop: 20, maxWidth: 480 }}>
+            Every screen from the editorial home feed through to the order placed. No dead ends, no orphaned states.
+          </p>
         </SectionReveal>
 
       </div>
+
+      {/* Full-width phone flow */}
+      <SectionReveal delay={80}>
+        <div className="flow-scroll" style={{ marginTop: 72, paddingLeft: 56, paddingRight: 56 }}>
+          <div style={{ display: "flex", gap: 20, alignItems: "flex-start", minWidth: "max-content", paddingBottom: 8 }}>
+            {SCREENS.map((s, i) => (
+              <div key={s.label} style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                <PhoneFrame label={s.label}>{s.screen}</PhoneFrame>
+                {i < SCREENS.length - 1 && (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ marginTop: -80, flexShrink: 0 }}>
+                    <path d="M4 10h12M10 5l7 5-7 5" stroke="var(--color-border)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </SectionReveal>
+
+      {/* Key decisions */}
+      <div style={{ maxWidth: 960, margin: "96px auto 0", padding: "0 56px" }}>
+        <SectionReveal>
+          <p style={{ ...T.label, marginBottom: 40 }}>Key decisions</p>
+          {DECISIONS.map((d, i) => (
+            <div
+              key={d.label}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 2fr",
+                gap: "24px 64px",
+                padding: "28px 0",
+                borderTop: "1px solid var(--color-border)",
+              }}
+            >
+              <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "var(--color-muted)", paddingTop: 2 }}>0{i + 1}</span>
+                <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 15, color: "var(--color-navy)", lineHeight: 1.4 }}>{d.label}</p>
+              </div>
+              <p style={T.body}>{d.body}</p>
+            </div>
+          ))}
+        </SectionReveal>
+      </div>
+
     </section>
   );
 }

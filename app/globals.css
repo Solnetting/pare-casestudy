@@ -1,71 +1,75 @@
 @import "tailwindcss";
 
 @theme {
-  /* === PARE COLOUR TOKENS === */
-  --color-pare-canvas:   #FAF8F5;
-  --color-pare-navy:     #1B2B4B;
-  --color-pare-navy-lt:  #2D3F5F;
-  --color-pare-teal:     #2A9D8F;
-  --color-pare-teal-dk:  #238A7C;
-  --color-pare-teal-lt:  #E8F5F3;
-  --color-pare-cream:    #F5EDD8;
-  --color-pare-mint:     #D4EDE9;
-  --color-pare-apricot:  #FAE5D3;
-  --color-pare-border:   #E8E2D9;
-  --color-pare-muted:    #8A9BB5;
-  --color-pare-subtle:   #6B7B8D;
+  --color-canvas:   #FAF8F5;
+  --color-navy:     #1B2B4B;
+  --color-teal:     #2A9D8F;
+  --color-teal-dk:  #1E7A6E;
+  --color-cream:    #F4EBD6;
+  --color-mint:     #E2F0EE;
+  --color-apricot:  #FAE5D3;
+  --color-border:   #E4DDD4;
+  --color-muted:    #8C9BAD;
+  --color-subtle:   #6B7A8A;
 
-  /* === PARE TYPOGRAPHY === */
-  --font-lora:  var(--font-lora-var), Georgia, "Times New Roman", serif;
-  --font-inter: var(--font-inter-var), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-lora-var), Georgia, serif;
+  --font-body:    var(--font-inter-var), system-ui, -apple-system, sans-serif;
 
-  /* === TYPE SCALE (12 14 16 18 20 24 28 32 48 64) === */
-  --text-3xl: 1.75rem;   /* 28px */
-  --text-4xl: 2rem;      /* 32px */
-  --text-5xl: 3rem;      /* 48px */
-  --text-6xl: 4rem;      /* 64px */
+  --text-3xl: 1.75rem;
+  --text-4xl: 2rem;
+  --text-5xl: 3rem;
+  --text-6xl: 4rem;
 }
 
-/* Base */
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-pare-canvas);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, ::before, ::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
 }
 
 body {
-  background-color: var(--color-pare-canvas);
-  color: var(--color-pare-navy);
-  font-family: var(--font-inter);
+  background-color: var(--color-canvas);
+  color: var(--color-navy);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Scroll offset for sticky nav */
-[id] { scroll-margin-top: 88px; }
+[id] { scroll-margin-top: 72px; }
 
-/* Focus ring */
 :focus-visible {
-  outline: 2px solid var(--color-pare-teal);
+  outline: 1.5px solid var(--color-teal);
   outline-offset: 3px;
-  border-radius: 4px;
 }
 
-/* Smooth section reveals */
+/* Editorial section divider */
+.chapter-rule {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 72px;
+}
+.chapter-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* Reveal animation */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
 }
-.reveal.is-visible {
+.reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -73,51 +77,22 @@ body {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* Chapter label style */
-.chapter-label {
-  font-family: var(--font-inter);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-pare-muted);
-}
-
-/* Horizontal scroll row */
-.scroll-row {
+/* Horizontal scroll (phone flow) */
+.flow-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  cursor: grab;
 }
-.scroll-row::-webkit-scrollbar { display: none; }
-
-/* Pare wordmark */
-.wordmark {
-  font-family: var(--font-lora);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-/* Teal underline on links */
-.pare-link {
-  color: var(--color-pare-teal);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-}
-.pare-link:hover { color: var(--color-pare-teal-dk); }
+.flow-scroll::-webkit-scrollbar { display: none; }
 
 /* Phone frame shadow */
-.phone-shadow {
+.frame-shadow {
   box-shadow:
-    0 0 0 1px rgba(27, 43, 75, 0.08),
-    0 8px 32px rgba(27, 43, 75, 0.14),
-    0 2px 8px rgba(27, 43, 75, 0.08);
+    0 0 0 1px rgba(27,43,75,0.07),
+    0 16px 48px rgba(27,43,75,0.12),
+    0 4px 12px rgba(27,43,75,0.06);
 }
 
-/* Campaign asset shadow */
-.asset-shadow {
-  box-shadow:
-    0 2px 12px rgba(27, 43, 75, 0.08),
-    0 1px 4px rgba(27, 43, 75, 0.06);
-}
+/* Content max-width */
+.prose-col { max-width: 640px; }

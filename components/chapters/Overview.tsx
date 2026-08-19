@@ -1,42 +1,24 @@
 import SectionReveal from "@/components/ui/SectionReveal";
 
-const MODEL_CARDS = [
+const MODEL = [
   {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9 22V12h6v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
     title: "Curated multi-brand retailer",
-    body: "Pare doesn't manufacture anything. It selects and sells products from aligned brands, applying a consistent quality bar across categories. Revenue comes from retail margin, not platform ads.",
+    body: "Pare doesn't manufacture anything. It selects and sells products from aligned brands, applying a consistent quality bar across categories. Revenue comes from retail margin — not ads, not data.",
   },
   {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5"/>
-        <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-    title: "Considered edit, not a catalogue",
-    body: "Every product in the range was chosen to reduce decision fatigue. No duplicates, no quantity-over-quality. Fewer, better options — organised by how people actually shop.",
+    title: "A considered edit, not a catalogue",
+    body: "Every product in the range was chosen to reduce decision fatigue. No duplicates, no quantity-over-quality. Fewer, better options organised by how people actually shop.",
   },
   {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M4 4h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M8 20h8M12 16v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
     title: "Recurring purchase at the core",
-    body: "Pare Repeat turns restocking into a subscription-like behaviour for qualifying products. It reduces friction and increases customer lifetime value without forcing a subscription model on everything.",
+    body: "Pare Repeat turns restocking into a frictionless habit for qualifying products. It increases lifetime value without locking every product into a subscription model.",
   },
 ];
 
-const WHY_CARDS = [
+const WHY = [
   {
     q: "Why not a general marketplace?",
-    a: "General marketplaces optimise for breadth and price. Pare optimises for trust and lower effort. The curation is the product.",
+    a: "General marketplaces optimise for breadth and price. Pare optimises for trust and reduced effort. The curation is the product.",
   },
   {
     q: "Why mobile-first?",
@@ -44,164 +26,200 @@ const WHY_CARDS = [
   },
   {
     q: "Why a recurring purchase mode?",
-    a: "Everyday essentials run out on predictable cycles. Automating restocking reduces the tax on people's attention without requiring a full subscription lock-in.",
+    a: "Everyday essentials run out on predictable cycles. Automating restocking reduces the tax on attention without requiring a full subscription lock-in.",
   },
 ];
 
+const S = {
+  label: { fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: "var(--color-muted)" },
+  h2:    { fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(40px, 5vw, 56px)", lineHeight: 1.06, letterSpacing: "-0.02em", color: "var(--color-navy)" },
+  h3:    { fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 16, color: "var(--color-navy)" },
+  body:  { fontFamily: "var(--font-inter-var)", fontSize: 16, lineHeight: 1.7, color: "var(--color-subtle)" },
+  small: { fontFamily: "var(--font-inter-var)", fontSize: 13, lineHeight: 1.6, color: "var(--color-subtle)" },
+};
+
 export default function Overview() {
   return (
-    <section id="overview" className="bg-pare-canvas py-28 px-6">
-      <div className="mx-auto max-w-5xl">
+    <section id="overview" style={{ background: "var(--color-canvas)", padding: "120px 0" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
-        {/* Chapter header */}
+        {/* Chapter marker */}
         <SectionReveal>
-          <div className="mb-16">
-            <p className="chapter-label mb-3">01 — Overview</p>
-            <h2
-              className="font-lora font-semibold text-pare-navy"
-              style={{ fontSize: 48, lineHeight: 1.1, letterSpacing: "-0.02em", maxWidth: 560 }}
-            >
-              What Pare is — and why it exists.
-            </h2>
+          <div className="chapter-rule">
+            <span style={S.label}>01</span>
+            <span style={S.label}>Overview</span>
           </div>
+          <h2 style={S.h2}>What Pare is — and why it exists.</h2>
         </SectionReveal>
 
-        {/* Intro */}
+        {/* Opening statement */}
         <SectionReveal delay={80}>
-          <div
-            className="mb-20 rounded-2xl border border-pare-border bg-pare-cream p-10"
-          >
+          <div style={{ marginTop: 64, maxWidth: 640 }}>
             <p
-              className="font-lora text-pare-navy"
-              style={{ fontSize: 24, lineHeight: 1.55, letterSpacing: "-0.01em", maxWidth: 640 }}
+              style={{
+                fontFamily: "var(--font-lora-var)",
+                fontWeight: 600,
+                fontSize: "clamp(22px, 2.5vw, 28px)",
+                lineHeight: 1.45,
+                color: "var(--color-navy)",
+                letterSpacing: "-0.01em",
+              }}
             >
               &ldquo;Pare&rdquo; means to reduce something to its essential form.
-              It is the product hypothesis applied to the company name: we help
-              people pare their habits down to what actually matters, one
-              everyday essential at a time.
+              It is the product strategy applied to the company name: help people
+              pare their habits down to what actually matters.
             </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              {[
-                ["Positioning", "Curated lower-waste essentials retailer"],
-                ["Mission", "Make sustainable choices the easy default"],
-                ["Model", "Multi-brand retail + optional recurring purchase"],
-              ].map(([k, v]) => (
-                <div key={k} className="flex flex-col gap-1">
-                  <span
-                    className="font-inter text-pare-muted"
-                    style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}
-                  >
-                    {k}
-                  </span>
-                  <span className="font-inter text-pare-navy" style={{ fontSize: 14, lineHeight: 1.5 }}>
-                    {v}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </SectionReveal>
 
-        {/* Business model cards */}
-        <SectionReveal delay={120}>
-          <p className="chapter-label mb-6">Business model</p>
-          <div className="mb-20 grid gap-4 sm:grid-cols-3">
-            {MODEL_CARDS.map((card) => (
+        {/* Positioning row */}
+        <SectionReveal delay={60}>
+          <div
+            style={{
+              marginTop: 72,
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 0,
+              borderTop: "1px solid var(--color-border)",
+            }}
+          >
+            {[
+              ["Positioning", "Curated lower-waste essentials retailer"],
+              ["Mission",     "Make sustainable choices the easy default"],
+              ["Model",       "Multi-brand retail + optional repeat purchase"],
+            ].map(([k, v], i) => (
               <div
-                key={card.title}
-                className="flex flex-col gap-4 rounded-2xl border border-pare-border bg-white p-6"
+                key={k}
+                style={{
+                  padding: "28px 32px 28px 0",
+                  borderRight: i < 2 ? "1px solid var(--color-border)" : "none",
+                  paddingLeft: i > 0 ? 32 : 0,
+                }}
               >
-                <div className="text-pare-teal">{card.icon}</div>
-                <h3
-                  className="font-inter font-semibold text-pare-navy"
-                  style={{ fontSize: 16 }}
-                >
-                  {card.title}
-                </h3>
-                <p className="font-inter text-pare-subtle" style={{ fontSize: 14, lineHeight: 1.6 }}>
-                  {card.body}
-                </p>
+                <p style={S.label}>{k}</p>
+                <p style={{ ...S.body, marginTop: 8, fontSize: 15 }}>{v}</p>
+              </div>
+            ))}
+          </div>
+        </SectionReveal>
+
+        {/* Business model */}
+        <SectionReveal delay={80}>
+          <div style={{ marginTop: 96 }}>
+            <p style={{ ...S.label, marginBottom: 40 }}>Business model</p>
+            {MODEL.map((item, i) => (
+              <div
+                key={item.title}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 2fr",
+                  gap: "24px 64px",
+                  padding: "32px 0",
+                  borderTop: "1px solid var(--color-border)",
+                  alignItems: "start",
+                }}
+              >
+                <div>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-inter-var)",
+                      fontSize: 11,
+                      color: "var(--color-muted)",
+                      display: "block",
+                      marginBottom: 8,
+                    }}
+                  >
+                    0{i + 1}
+                  </span>
+                  <p style={S.h3}>{item.title}</p>
+                </div>
+                <p style={S.body}>{item.body}</p>
               </div>
             ))}
           </div>
         </SectionReveal>
 
         {/* Target user */}
-        <SectionReveal delay={80}>
-          <p className="chapter-label mb-6">Target user</p>
-          <div className="mb-20 rounded-2xl border border-pare-border bg-pare-mint p-8 sm:p-10">
-            <div className="grid gap-8 sm:grid-cols-2">
-              <div>
-                <h3
-                  className="font-lora font-semibold text-pare-navy"
-                  style={{ fontSize: 24, letterSpacing: "-0.01em" }}
-                >
-                  Environmentally conscious adults,&nbsp;25–45
-                </h3>
-                <p className="mt-4 font-inter text-pare-subtle" style={{ fontSize: 15, lineHeight: 1.65 }}>
-                  They already care about sustainability but find it genuinely hard to act on — products are scattered across too many stores, certifications are confusing, and greenwashing erodes trust. They want someone to have done the research for them.
-                </p>
-              </div>
-              <div className="flex flex-col gap-4">
-                {[
-                  ["Pain", "Overwhelmed by choice, sceptical of claims"],
-                  ["Goal", "Shop in line with values without extra effort"],
-                  ["Behaviour", "Researches before buying, prefers subscriptions for basics"],
-                  ["Context", "Urban, mobile-first, time-poor"],
-                ].map(([k, v]) => (
-                  <div key={k} className="flex flex-col gap-0.5">
-                    <span
-                      className="font-inter text-pare-teal"
-                      style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}
-                    >
-                      {k}
-                    </span>
-                    <span className="font-inter text-pare-navy" style={{ fontSize: 14, lineHeight: 1.5 }}>
-                      {v}
-                    </span>
-                  </div>
-                ))}
-              </div>
+        <SectionReveal delay={60}>
+          <div
+            style={{
+              marginTop: 96,
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 64,
+              alignItems: "start",
+              padding: "64px",
+              background: "var(--color-cream)",
+              borderRadius: 8,
+            }}
+          >
+            <div>
+              <p style={{ ...S.label, marginBottom: 24 }}>Target user</p>
+              <p
+                style={{
+                  fontFamily: "var(--font-lora-var)",
+                  fontWeight: 600,
+                  fontSize: 28,
+                  lineHeight: 1.3,
+                  color: "var(--color-navy)",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                Environmentally conscious adults, 25–45.
+              </p>
+              <p style={{ ...S.body, marginTop: 20 }}>
+                They already care about sustainability but find it genuinely hard to act on — products are scattered across too many stores, certifications are confusing, and greenwashing erodes trust. They want someone to have done the research for them.
+              </p>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              {[
+                ["Pain",      "Overwhelmed by choice, sceptical of claims"],
+                ["Goal",      "Shop in line with values without extra effort"],
+                ["Behaviour", "Researches before buying, prefers subscriptions for basics"],
+                ["Context",   "Urban, mobile-first, time-poor"],
+              ].map(([k, v]) => (
+                <div key={k} style={{ borderTop: "1px solid rgba(27,43,75,0.08)", paddingTop: 16 }}>
+                  <p style={{ ...S.label, color: "var(--color-teal)", marginBottom: 6 }}>{k}</p>
+                  <p style={S.small}>{v}</p>
+                </div>
+              ))}
             </div>
           </div>
         </SectionReveal>
 
-        {/* Product hypothesis + Why Pare */}
-        <div className="grid gap-6 sm:grid-cols-2 mb-20">
-          <SectionReveal className="rounded-2xl border border-pare-border bg-white p-8">
-            <p className="chapter-label mb-4">Product hypothesis</p>
-            <p className="font-inter text-pare-navy" style={{ fontSize: 16, lineHeight: 1.65 }}>
-              If we remove the research burden and reduce the friction of re-purchasing,
-              people who already want to shop sustainably will shop that way more
-              consistently — and feel better doing it.
-            </p>
-            <div className="mt-6 h-px bg-pare-border" />
-            <p className="mt-6 font-inter text-pare-subtle" style={{ fontSize: 13, lineHeight: 1.55 }}>
-              Validated heuristically against competitor journeys and user
-              interviews. Formal usability testing is the planned next step.
-            </p>
-          </SectionReveal>
-
-          <div className="flex flex-col gap-4">
-            {WHY_CARDS.map((card, i) => (
-              <SectionReveal
-                key={card.q}
-                delay={i * 60}
-                className="rounded-2xl border border-pare-border bg-white p-6"
+        {/* Hypothesis + Why */}
+        <SectionReveal delay={80}>
+          <div style={{ marginTop: 96, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
+            <div>
+              <p style={{ ...S.label, marginBottom: 24 }}>Product hypothesis</p>
+              <p
+                style={{
+                  fontFamily: "var(--font-lora-var)",
+                  fontSize: 20,
+                  lineHeight: 1.55,
+                  color: "var(--color-navy)",
+                }}
               >
-                <p
-                  className="font-inter font-semibold text-pare-navy"
-                  style={{ fontSize: 14, marginBottom: 8 }}
+                If we remove the research burden and reduce the friction of re-purchasing, people who already want to shop sustainably will shop that way more consistently — and feel better doing it.
+              </p>
+              <p style={{ ...S.small, marginTop: 20, borderTop: "1px solid var(--color-border)", paddingTop: 20 }}>
+                Validated heuristically against competitor journeys. Formal usability testing is the planned next step.
+              </p>
+            </div>
+            <div>
+              <p style={{ ...S.label, marginBottom: 24 }}>Why not just another marketplace?</p>
+              {WHY.map((item) => (
+                <div
+                  key={item.q}
+                  style={{ borderTop: "1px solid var(--color-border)", padding: "20px 0" }}
                 >
-                  {card.q}
-                </p>
-                <p className="font-inter text-pare-subtle" style={{ fontSize: 13, lineHeight: 1.6 }}>
-                  {card.a}
-                </p>
-              </SectionReveal>
-            ))}
+                  <p style={{ ...S.h3, marginBottom: 8, fontSize: 14 }}>{item.q}</p>
+                  <p style={S.small}>{item.a}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </SectionReveal>
 
       </div>
     </section>

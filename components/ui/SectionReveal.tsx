@@ -14,33 +14,19 @@ export default function SectionReveal({ children, className = "", delay = 0 }: P
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      el.classList.add("is-visible");
-      return;
-    }
+    if (reduced) { el.classList.add("visible"); return; }
 
     el.classList.add("reveal");
     if (delay) el.style.transitionDelay = `${delay}ms`;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("is-visible");
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.08 }
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add("visible"); io.disconnect(); } },
+      { threshold: 0.06 }
     );
-
-    observer.observe(el);
-    return () => observer.disconnect();
+    io.observe(el);
+    return () => io.disconnect();
   }, [delay]);
 
-  return (
-    <div ref={ref} className={className}>
-      {children}
-    </div>
-  );
+  return <div ref={ref} className={className}>{children}</div>;
 }

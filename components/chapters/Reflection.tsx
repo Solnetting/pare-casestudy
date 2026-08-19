@@ -1,10 +1,14 @@
 import SectionReveal from "@/components/ui/SectionReveal";
 
-const KEY_DECISIONS = [
+const T = {
+  label: { fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" as const },
+};
+
+const DECISIONS = [
   {
     n: "01",
     title: "Scoping Repeat, not forcing it",
-    body: "The temptation was to make recurring purchase the default for all products. We scoped it to products where restocking is a real behaviour — everyday consumables — and kept one-time purchase clean and uncomplicating. This reduced scope and increased clarity.",
+    body: "The temptation was to make recurring purchase the default for all products. Scoping it to products where restocking is a real behaviour — everyday consumables — and keeping one-time purchase clean and uncomplicating reduced scope and increased clarity.",
     changed: "Initially, Repeat messaging appeared on every product. It was removed from one-time items when it became clear the recurring frame added confusion, not value.",
   },
   {
@@ -16,186 +20,135 @@ const KEY_DECISIONS = [
   {
     n: "03",
     title: "Cart as a rest stop",
-    body: "Most e-commerce carts remove 'continue shopping' in favour of aggressive checkout prompting. Pare's audience is deliberate. Giving them a clear off-ramp reduced the feeling of pressure and aligned with brand tone.",
+    body: "Most e-commerce carts remove 'continue shopping' in favour of aggressive checkout prompting. Pare's audience is deliberate. Giving them a clear off-ramp aligned with brand tone.",
     changed: "The first cart iteration had only a checkout button. Testing against competitor flows showed it felt transactional in a way that contradicted the brand.",
   },
   {
     n: "04",
     title: "Campaign without app-store buttons on physical assets",
-    body: "The trade-show totem has a QR code, not an 'App Store' button. Physical assets at trade shows reach people who haven't decided anything yet. A QR to the web campaign is a lower-commitment entry point and doesn't presuppose device platform.",
-    changed: "Early totem designs had both QR and app-store badges. Removing the badges simplified the asset and avoided prematurely asking for a high-commitment action.",
+    body: "The trade-show totem has a QR code, not an App Store button. Physical assets at trade shows reach people who haven't decided anything yet — a lower-commitment entry point.",
+    changed: "Early totem designs had both QR and app-store badges. Removing them simplified the asset and avoided asking for a high-commitment action too early.",
   },
 ];
 
-const WHAT_WAS_CHALLENGED = [
-  {
-    challenge: "Is curation enough of a moat?",
-    honest: "Probably not on its own. Curation is table-stakes if competitors copy it. The Repeat infrastructure and the curated brand relationships are harder to replicate than the product selection itself.",
-  },
-  {
-    challenge: "Does the target user actually want a separate app?",
-    honest: "Not validated. The hypothesis is that a focused experience outperforms general retail on satisfaction — but it may not outperform on discovery. This is the gap that needs research.",
-  },
-  {
-    challenge: "Is the savings language honest?",
-    honest: "The 10% Repeat saving was chosen as representative, not as a confirmed commercial figure. Final pricing would be set after supplier negotiations. The copy is directionally honest but needs financial modelling.",
-  },
+const CHALLENGED = [
+  { q: "Is curation enough of a moat?", a: "Probably not on its own. Curation is table-stakes if competitors copy it. The Repeat infrastructure and curated brand relationships are harder to replicate than the product selection itself." },
+  { q: "Does the target user want a separate app?", a: "Not validated. The hypothesis is that a focused experience outperforms general retail on satisfaction — but it may not outperform on discovery. This is the gap that needs research." },
+  { q: "Is the savings language honest?", a: "The 10% Repeat saving is representative, not confirmed commercially. Final pricing needs financial modelling after supplier negotiations." },
 ];
 
-const NEXT_STEPS = [
-  "Moderated usability sessions on the purchase-mode screen — the Repeat vs. one-time toggle is the highest-risk interaction.",
+const NEXT = [
+  "Moderated usability sessions on the purchase-mode screen — Repeat vs. one-time toggle is the highest-risk interaction.",
   "Supplier negotiation to set real Repeat margins, then update all pricing copy.",
-  "Accessibility audit: colour contrast ratios for proof labels and muted text against cream and mint surfaces.",
-  "Quantitative test: does showing annual saving (£10.80) convert better than monthly saving (£0.90/month) in the Repeat cue?",
-  "Engineering handoff: finalise spacing tokens and confirm inter-app navigation behaviour with the dev team.",
+  "Accessibility audit: colour contrast on proof labels and muted text against cream and mint surfaces.",
+  "Quantitative test: does showing annual saving (£10.80) convert better than monthly (£0.90/mo) in the Repeat cue?",
+  "Engineering handoff: finalise spacing tokens and confirm inter-tab navigation behaviour.",
 ];
 
 export default function Reflection() {
   return (
-    <section id="reflection" className="bg-pare-navy py-28 px-6">
-      <div className="mx-auto max-w-5xl">
+    <section id="reflection" style={{ background: "var(--color-navy)", padding: "120px 0" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
 
-        {/* Chapter header */}
         <SectionReveal>
-          <div className="mb-16">
-            <p className="chapter-label mb-3" style={{ color: "#4A6480" }}>06 — Reflection</p>
-            <h2
-              className="font-lora font-semibold text-white"
-              style={{ fontSize: 48, lineHeight: 1.1, letterSpacing: "-0.02em", maxWidth: 580 }}
-            >
-              What changed, what was challenged, what comes next.
-            </h2>
-            <div className="mt-6 rounded-2xl border p-5" style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.05)" }}>
-              <p className="font-inter text-white/70" style={{ fontSize: 14, lineHeight: 1.65 }}>
-                <strong className="font-semibold text-white">Honest note on validation:</strong> All design decisions in this project were validated heuristically — competitor analysis, journey mapping, and design critique — rather than through formal usability studies or quantitative testing. The next phase of work is to test the assumptions that carry the most risk.
-              </p>
-            </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 64 }}>
+            <span style={{ ...T.label, color: "rgba(255,255,255,0.3)" }}>06</span>
+            <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }}/>
+            <span style={{ ...T.label, color: "rgba(255,255,255,0.3)" }}>Reflection</span>
+          </div>
+          <h2 style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(40px,5vw,56px)", lineHeight: 1.06, letterSpacing: "-0.02em", color: "white", maxWidth: 580 }}>
+            What changed, what was challenged, what comes next.
+          </h2>
+          <div style={{ marginTop: 32, padding: "20px 24px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6 }}>
+            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, lineHeight: 1.65, color: "rgba(255,255,255,0.6)" }}>
+              <strong style={{ fontWeight: 500, color: "rgba(255,255,255,0.8)" }}>Honest note on validation:</strong> All design decisions were validated heuristically — competitor analysis, journey mapping, and design critique — not through formal usability studies. The next phase is to test the assumptions that carry the most risk.
+            </p>
           </div>
         </SectionReveal>
 
-        {/* Key decisions */}
+        {/* Decisions */}
         <SectionReveal delay={60}>
-          <div className="mb-16">
-            <p className="font-inter font-semibold text-white/50 mb-8" style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              Key decisions + what changed
-            </p>
-            <div className="flex flex-col gap-5">
-              {KEY_DECISIONS.map((d) => (
-                <div
-                  key={d.n}
-                  className="rounded-2xl p-6 sm:p-8"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}
-                >
-                  <div className="flex items-start gap-5">
-                    <span
-                      className="flex-shrink-0 font-inter font-semibold"
-                      style={{ fontSize: 12, color: "#2A9D8F", letterSpacing: "0.06em", marginTop: 3 }}
-                    >
-                      {d.n}
-                    </span>
-                    <div className="flex-1">
-                      <h3
-                        className="font-inter font-semibold text-white"
-                        style={{ fontSize: 16, marginBottom: 10 }}
-                      >
-                        {d.title}
-                      </h3>
-                      <p className="font-inter text-white/65" style={{ fontSize: 14, lineHeight: 1.65 }}>
-                        {d.body}
-                      </p>
-                      <div
-                        className="mt-5 flex items-start gap-3 rounded-xl p-4"
-                        style={{ background: "rgba(42,157,143,0.12)", border: "1px solid rgba(42,157,143,0.2)" }}
-                      >
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="mt-0.5 flex-shrink-0">
-                          <path d="M2 7a5 5 0 009.9-1M12 3v3h-3" stroke="#2A9D8F" strokeWidth="1.5" strokeLinecap="round"/>
-                        </svg>
-                        <p className="font-inter text-white/60" style={{ fontSize: 13, lineHeight: 1.55 }}>
-                          <span className="font-semibold text-white/80">What changed: </span>
-                          {d.changed}
-                        </p>
-                      </div>
-                    </div>
+          <div style={{ marginTop: 80 }}>
+            <p style={{ ...T.label, color: "rgba(255,255,255,0.3)", marginBottom: 40 }}>Key decisions + what changed</p>
+            {DECISIONS.map((d) => (
+              <div
+                key={d.n}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "48px 1fr",
+                  gap: 32,
+                  padding: "40px 0",
+                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, color: "#2A9D8F", fontWeight: 500, paddingTop: 3 }}>{d.n}</span>
+                <div>
+                  <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 16, color: "white", marginBottom: 12 }}>{d.title}</p>
+                  <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 15, lineHeight: 1.7, color: "rgba(255,255,255,0.6)" }}>{d.body}</p>
+                  <div style={{ marginTop: 20, padding: "16px 20px", background: "rgba(42,157,143,0.1)", border: "1px solid rgba(42,157,143,0.18)", borderRadius: 6 }}>
+                    <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, lineHeight: 1.6, color: "rgba(255,255,255,0.55)" }}>
+                      <span style={{ fontWeight: 500, color: "rgba(255,255,255,0.7)" }}>What changed: </span>
+                      {d.changed}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </SectionReveal>
 
-        {/* What was challenged */}
+        {/* Challenged */}
         <SectionReveal delay={60}>
-          <div className="mb-16">
-            <p className="font-inter font-semibold text-white/50 mb-8" style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              What was challenged
-            </p>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {WHAT_WAS_CHALLENGED.map((c) => (
-                <div
-                  key={c.challenge}
-                  className="rounded-2xl p-6"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}
-                >
-                  <p className="font-inter font-semibold text-white" style={{ fontSize: 14, lineHeight: 1.4, marginBottom: 10 }}>
-                    {c.challenge}
-                  </p>
-                  <p className="font-inter text-white/60" style={{ fontSize: 13, lineHeight: 1.65 }}>
-                    {c.honest}
-                  </p>
+          <div style={{ marginTop: 80 }}>
+            <p style={{ ...T.label, color: "rgba(255,255,255,0.3)", marginBottom: 40 }}>What was challenged</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+              {CHALLENGED.map((c) => (
+                <div key={c.q} style={{ padding: "24px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 6 }}>
+                  <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 15, color: "white", marginBottom: 12, lineHeight: 1.4 }}>{c.q}</p>
+                  <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, lineHeight: 1.65, color: "rgba(255,255,255,0.55)" }}>{c.a}</p>
                 </div>
               ))}
             </div>
           </div>
         </SectionReveal>
 
-        {/* What's next */}
+        {/* Next */}
         <SectionReveal delay={80}>
-          <div>
-            <p className="font-inter font-semibold text-white/50 mb-8" style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              What would be validated next
-            </p>
-            <div className="flex flex-col gap-3">
-              {NEXT_STEPS.map((step, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-4 rounded-2xl px-6 py-4"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
-                >
-                  <span
-                    className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full font-inter font-semibold text-white"
-                    style={{ background: "rgba(42,157,143,0.3)", fontSize: 11 }}
-                  >
-                    {i + 1}
-                  </span>
-                  <p className="font-inter text-white/70" style={{ fontSize: 14, lineHeight: 1.6, marginTop: 1 }}>
-                    {step}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Closing thought */}
-            <div
-              className="mt-12 rounded-2xl p-8"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-            >
-              <p
-                className="font-lora font-semibold italic text-white/80"
-                style={{ fontSize: 24, lineHeight: 1.45, letterSpacing: "-0.01em" }}
+          <div style={{ marginTop: 80 }}>
+            <p style={{ ...T.label, color: "rgba(255,255,255,0.3)", marginBottom: 40 }}>What would be validated next</p>
+            {NEXT.map((step, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "40px 1fr",
+                  gap: 24,
+                  padding: "20px 0",
+                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                  alignItems: "flex-start",
+                }}
               >
-                &ldquo;Good design isn&apos;t finished when there&apos;s nothing left to add — it&apos;s finished when there&apos;s nothing left to take away.&rdquo;
-              </p>
-              <p className="mt-4 font-inter text-white/40" style={{ fontSize: 13 }}>
-                That&apos;s what Pare is. That&apos;s what this project tried to be.
-              </p>
-            </div>
+                <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, color: "rgba(255,255,255,0.25)", paddingTop: 1 }}>0{i+1}</span>
+                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 15, lineHeight: 1.65, color: "rgba(255,255,255,0.6)" }}>{step}</p>
+              </div>
+            ))}
+          </div>
+        </SectionReveal>
+
+        {/* Closing quote */}
+        <SectionReveal delay={60}>
+          <div style={{ marginTop: 80, padding: "48px", background: "rgba(255,255,255,0.03)", borderRadius: 6, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+            <p style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(20px,2.5vw,28px)", lineHeight: 1.45, color: "rgba(255,255,255,0.75)", fontStyle: "italic", letterSpacing: "-0.01em" }}>
+              &ldquo;Good design isn&apos;t finished when there&apos;s nothing left to add — it&apos;s finished when there&apos;s nothing left to take away.&rdquo;
+            </p>
+            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, color: "rgba(255,255,255,0.3)", marginTop: 20 }}>That&apos;s what Pare is. That&apos;s what this project tried to be.</p>
           </div>
         </SectionReveal>
 
         {/* Footer */}
-        <div className="mt-20 flex items-center justify-between border-t border-white/10 pt-8">
-          <span className="wordmark text-white/30" style={{ fontSize: 20, letterSpacing: "-0.04em" }}>Pare</span>
-          <span className="font-inter text-white/30" style={{ fontSize: 12 }}>Case Study · 2025</span>
+        <div style={{ marginTop: 80, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: 18, color: "rgba(255,255,255,0.2)", letterSpacing: "-0.03em" }}>Pare</span>
+          <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, color: "rgba(255,255,255,0.2)" }}>Case Study · 2025</span>
         </div>
 
       </div>

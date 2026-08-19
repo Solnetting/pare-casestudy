@@ -3,57 +3,88 @@ import { ReactNode } from "react";
 interface Props {
   children: ReactNode;
   label?: string;
-  className?: string;
 }
 
-export default function PhoneFrame({ children, label, className = "" }: Props) {
+export default function PhoneFrame({ children, label }: Props) {
   return (
-    <div className={`flex flex-col items-center gap-4 ${className}`}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
       {/* Frame */}
       <div
-        className="phone-shadow relative flex-shrink-0 rounded-[2.5rem] bg-pare-navy"
-        style={{ width: 200, height: 412 }}
+        className="frame-shadow"
+        style={{
+          width: 210,
+          height: 434,
+          borderRadius: 38,
+          background: "#14202E",
+          position: "relative",
+          flexShrink: 0,
+        }}
       >
         {/* Dynamic island */}
         <div
-          className="absolute top-3.5 left-1/2 -translate-x-1/2 bg-pare-navy rounded-full z-10"
-          style={{ width: 72, height: 22 }}
+          style={{
+            position: "absolute",
+            top: 14,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 74,
+            height: 22,
+            borderRadius: 12,
+            background: "#14202E",
+            zIndex: 10,
+          }}
         />
         {/* Screen */}
         <div
-          className="absolute inset-[3px] rounded-[2.2rem] bg-white overflow-hidden"
-          style={{ top: 3, bottom: 3, left: 3, right: 3 }}
+          style={{
+            position: "absolute",
+            inset: 3,
+            borderRadius: 35,
+            background: "white",
+            overflow: "hidden",
+          }}
         >
           {/* Status bar */}
-          <div className="flex items-center justify-between px-5 pt-5 pb-1">
-            <span
-              className="font-inter text-pare-navy"
-              style={{ fontSize: 9, fontWeight: 600 }}
-            >
-              9:41
-            </span>
-            <div className="flex items-center gap-1">
-              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                <rect x="0" y="2" width="2" height="6" rx="0.5" fill="#1B2B4B" opacity="0.4"/>
-                <rect x="3" y="1" width="2" height="7" rx="0.5" fill="#1B2B4B" opacity="0.6"/>
-                <rect x="6" y="0" width="2" height="8" rx="0.5" fill="#1B2B4B"/>
-                <rect x="9" y="0" width="2" height="8" rx="0.5" fill="#1B2B4B"/>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "14px 18px 6px",
+            }}
+          >
+            <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 9, fontWeight: 600, color: "#1B2B4B" }}>9:41</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+              <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                <rect x="0" y="2.5" width="1.5" height="5.5" rx="0.5" fill="#1B2B4B" opacity="0.4"/>
+                <rect x="2.5" y="1.5" width="1.5" height="6.5" rx="0.5" fill="#1B2B4B" opacity="0.6"/>
+                <rect x="5" y="0" width="1.5" height="8" rx="0.5" fill="#1B2B4B"/>
+                <rect x="7.5" y="0" width="1.5" height="8" rx="0.5" fill="#1B2B4B"/>
               </svg>
-              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                <rect x="0.5" y="0.5" width="10" height="7" rx="1.5" stroke="#1B2B4B" strokeWidth="1"/>
-                <rect x="11" y="2.5" width="1" height="3" rx="0.5" fill="#1B2B4B"/>
+              <svg width="13" height="8" viewBox="0 0 13 8" fill="none">
+                <rect x="0.5" y="0.5" width="10.5" height="7" rx="1.5" stroke="#1B2B4B" strokeWidth="0.8"/>
+                <rect x="11.5" y="2.5" width="1" height="3" rx="0.5" fill="#1B2B4B"/>
                 <rect x="2" y="2" width="7" height="4" rx="0.5" fill="#1B2B4B"/>
               </svg>
             </div>
           </div>
+
           {/* Screen content */}
-          <div className="h-full overflow-hidden">{children}</div>
+          <div style={{ position: "relative", height: "calc(100% - 32px)", overflow: "hidden" }}>
+            {children}
+          </div>
         </div>
       </div>
+
       {label && (
         <span
-          className="text-center font-inter text-pare-subtle"
-          style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.04em" }}
+          style={{
+            fontFamily: "var(--font-inter-var)",
+            fontSize: 11,
+            fontWeight: 400,
+            color: "var(--color-muted)",
+            letterSpacing: "0.02em",
+          }}
         >
           {label}
         </span>

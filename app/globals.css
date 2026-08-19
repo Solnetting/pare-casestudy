@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* === PARE COLOUR TOKENS === */
+  --color-pare-canvas:   #FAF8F5;
+  --color-pare-navy:     #1B2B4B;
+  --color-pare-navy-lt:  #2D3F5F;
+  --color-pare-teal:     #2A9D8F;
+  --color-pare-teal-dk:  #238A7C;
+  --color-pare-teal-lt:  #E8F5F3;
+  --color-pare-cream:    #F5EDD8;
+  --color-pare-mint:     #D4EDE9;
+  --color-pare-apricot:  #FAE5D3;
+  --color-pare-border:   #E8E2D9;
+  --color-pare-muted:    #8A9BB5;
+  --color-pare-subtle:   #6B7B8D;
+
+  /* === PARE TYPOGRAPHY === */
+  --font-lora:  var(--font-lora-var), Georgia, "Times New Roman", serif;
+  --font-inter: var(--font-inter-var), system-ui, -apple-system, sans-serif;
+
+  /* === TYPE SCALE (12 14 16 18 20 24 28 32 48 64) === */
+  --text-3xl: 1.75rem;   /* 28px */
+  --text-4xl: 2rem;      /* 32px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 4rem;      /* 64px */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-pare-canvas);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-pare-canvas);
+  color: var(--color-pare-navy);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Scroll offset for sticky nav */
+[id] { scroll-margin-top: 88px; }
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-pare-teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Smooth section reveals */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Chapter label style */
+.chapter-label {
+  font-family: var(--font-inter);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-pare-muted);
+}
+
+/* Horizontal scroll row */
+.scroll-row {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.scroll-row::-webkit-scrollbar { display: none; }
+
+/* Pare wordmark */
+.wordmark {
+  font-family: var(--font-lora);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Teal underline on links */
+.pare-link {
+  color: var(--color-pare-teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.pare-link:hover { color: var(--color-pare-teal-dk); }
+
+/* Phone frame shadow */
+.phone-shadow {
+  box-shadow:
+    0 0 0 1px rgba(27, 43, 75, 0.08),
+    0 8px 32px rgba(27, 43, 75, 0.14),
+    0 2px 8px rgba(27, 43, 75, 0.08);
+}
+
+/* Campaign asset shadow */
+.asset-shadow {
+  box-shadow:
+    0 2px 12px rgba(27, 43, 75, 0.08),
+    0 1px 4px rgba(27, 43, 75, 0.06);
 }

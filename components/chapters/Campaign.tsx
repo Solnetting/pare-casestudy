@@ -2,7 +2,7 @@ import SectionReveal from "@/components/ui/SectionReveal";
 
 const T = {
   label: { fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: "var(--color-muted)" },
-  body:  { fontFamily: "var(--font-inter-var)", fontSize: 15, lineHeight: 1.7, color: "var(--color-subtle)" },
+  body:  { fontFamily: "var(--font-inter-var)", fontSize: 15, lineHeight: 1.7, color: "var(--color-subtle)" } as React.CSSProperties,
 };
 
 function QR({ size = 96 }: { size?: number }) {
@@ -38,52 +38,27 @@ function QR({ size = 96 }: { size?: number }) {
   );
 }
 
-/* ── Campaign hero ── */
 function CampaignVisual() {
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        minHeight: 440,
-        background: "#F4EBD6",
-        borderRadius: 8,
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      {/* Apricot blob */}
-      <div style={{ position: "absolute", right: -60, top: -60, width: 500, height: 500, borderRadius: "50%", background: "#FAE5D3", opacity: 0.7 }}/>
-      {/* Mint strip */}
-      <div style={{ position: "absolute", left: 0, bottom: 80, width: 240, height: 6, background: "#E2F0EE" }}/>
-
-      <div style={{ position: "relative", zIndex: 1, padding: "64px 72px" }}>
+    <div style={{ position: "relative", width: "100%", minHeight: 480, background: "#F4EBD6", borderRadius: 12, overflow: "hidden", display: "flex", alignItems: "center" }}>
+      <div style={{ position: "absolute", right: -80, top: -80, width: 560, height: 560, borderRadius: "50%", background: "#FAE5D3", opacity: 0.7 }}/>
+      <div style={{ position: "absolute", left: 0, bottom: 100, width: 260, height: 6, background: "#E2F0EE" }}/>
+      <div style={{ position: "relative", zIndex: 1, padding: "72px 80px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 32 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#2A9D8F" }}/>
           <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#8C9BAD", textTransform: "uppercase" }}>Spring 2025 · Campaign</span>
         </div>
-        <h3
-          style={{
-            fontFamily: "var(--font-lora-var)",
-            fontWeight: 600,
-            fontSize: "clamp(48px, 6vw, 80px)",
-            lineHeight: 1.02,
-            letterSpacing: "-0.03em",
-            color: "#1B2B4B",
-            maxWidth: 540,
-          }}
-        >
+        <h3 style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(52px,7vw,88px)", lineHeight: 0.98, letterSpacing: "-0.035em", color: "#1B2B4B", maxWidth: 520 }}>
           The Home<br/>Reset.
         </h3>
-        <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 18, lineHeight: 1.6, color: "#6B7A8A", maxWidth: 400, marginTop: 24 }}>
+        <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 18, lineHeight: 1.6, color: "#6B7A8A", maxWidth: 400, marginTop: 28 }}>
           Every spring, people clear out what doesn&apos;t belong. Pare helps them replace what stays with better versions of itself.
         </p>
-        <div style={{ marginTop: 40, display: "flex", alignItems: "center", gap: 24 }}>
-          <button style={{ background: "#2A9D8F", color: "white", border: "none", borderRadius: 6, padding: "12px 24px", fontFamily: "var(--font-inter-var)", fontSize: 14, fontWeight: 600, cursor: "default" }}>
+        <div style={{ marginTop: 44, display: "flex", alignItems: "center", gap: 24 }}>
+          <button style={{ background: "#2A9D8F", color: "white", border: "none", borderRadius: 6, padding: "14px 28px", fontFamily: "var(--font-inter-var)", fontSize: 14, fontWeight: 600, cursor: "default" }}>
             Shop the edit
           </button>
-          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
             {["Save 10% with Repeat", "Free delivery on £40+", "B Corp brands"].map(s => (
               <div key={s} style={{ display: "flex", alignItems: "center", gap: 6 }}>
                 <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#2A9D8F", flexShrink: 0 }}/>
@@ -93,44 +68,31 @@ function CampaignVisual() {
           </div>
         </div>
       </div>
-
       {/* Abstract product cluster */}
       <div style={{ position: "absolute", right: 80, top: "50%", transform: "translateY(-50%)" }}>
-        <svg width="260" height="300" viewBox="0 0 260 300" fill="none">
-          <rect x="20" y="20" width="100" height="140" rx="10" fill="white"/>
-          <rect x="36" y="36" width="68" height="68" rx="7" fill="#F4EBD6"/>
-          <rect x="44" y="116" width="52" height="5" rx="2.5" fill="#E2F0EE"/>
-          <rect x="44" y="126" width="36" height="5" rx="2.5" fill="#FAE5D3"/>
-          <rect x="138" y="40" width="96" height="104" rx="10" fill="white"/>
-          <rect x="154" y="56" width="64" height="64" rx="7" fill="#E2F0EE"/>
-          <rect x="154" y="130" width="44" height="5" rx="2.5" fill="#F4EBD6"/>
-          <rect x="60" y="180" width="140" height="80" rx="10" fill="white"/>
-          <rect x="76" y="196" width="52" height="48" rx="7" fill="#FAE5D3"/>
-          <rect x="144" y="200" width="36" height="5" rx="2.5" fill="#E2F0EE"/>
-          <rect x="144" y="212" width="26" height="5" rx="2.5" fill="#F4EBD6"/>
-          <rect x="20" y="178" width="26" height="26" rx="6" fill="#E2F0EE" opacity="0.8"/>
+        <svg width="280" height="320" viewBox="0 0 280 320" fill="none">
+          <rect x="20" y="20" width="110" height="150" rx="10" fill="white"/>
+          <rect x="36" y="36" width="78" height="78" rx="7" fill="#F4EBD6"/>
+          <rect x="44" y="126" width="60" height="5" rx="2.5" fill="#E2F0EE"/>
+          <rect x="44" y="138" width="42" height="5" rx="2.5" fill="#FAE5D3"/>
+          <rect x="148" y="40" width="108" height="114" rx="10" fill="white"/>
+          <rect x="164" y="56" width="76" height="76" rx="7" fill="#E2F0EE"/>
+          <rect x="164" y="144" width="52" height="5" rx="2.5" fill="#F4EBD6"/>
+          <rect x="60" y="196" width="160" height="90" rx="10" fill="white"/>
+          <rect x="76" y="212" width="64" height="58" rx="7" fill="#FAE5D3"/>
+          <rect x="156" y="216" width="44" height="5" rx="2.5" fill="#E2F0EE"/>
+          <rect x="156" y="228" width="32" height="5" rx="2.5" fill="#F4EBD6"/>
+          <rect x="20" y="194" width="28" height="28" rx="6" fill="#E2F0EE" opacity="0.8"/>
         </svg>
       </div>
     </div>
   );
 }
 
-/* ── Totem ── */
 function Totem() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-      <div
-        style={{
-          width: 160,
-          height: 440,
-          background: "#1B2B4B",
-          borderRadius: 8,
-          display: "flex",
-          flexDirection: "column",
-          overflow: "hidden",
-          boxShadow: "0 8px 32px rgba(27,43,75,0.2), 0 2px 8px rgba(27,43,75,0.12)",
-        }}
-      >
+      <div style={{ width: 160, height: 440, background: "#1B2B4B", borderRadius: 8, display: "flex", flexDirection: "column", overflow: "hidden", boxShadow: "0 8px 32px rgba(27,43,75,0.2), 0 2px 8px rgba(27,43,75,0.12)" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 16px 12px" }}>
           <span style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: 18, color: "white", letterSpacing: "-0.03em" }}>Pare</span>
           <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#2A9D8F" }}/>
@@ -159,9 +121,7 @@ function Totem() {
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px" }}>
-          <div style={{ background: "white", borderRadius: 5, padding: 4, flexShrink: 0 }}>
-            <QR size={48}/>
-          </div>
+          <div style={{ background: "white", borderRadius: 5, padding: 4, flexShrink: 0 }}><QR size={48}/></div>
           <div>
             <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 9.5, color: "white" }}>Scan to shop</p>
             <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 8.5, color: "rgba(255,255,255,0.4)", marginTop: 1 }}>pare.com/reset</p>
@@ -181,21 +141,10 @@ function Totem() {
   );
 }
 
-/* ── Meta Story ── */
 function MetaStory() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-      <div
-        style={{
-          width: 150,
-          height: 266,
-          background: "#FAE5D3",
-          borderRadius: 14,
-          overflow: "hidden",
-          position: "relative",
-          boxShadow: "0 4px 20px rgba(27,43,75,0.12)",
-        }}
-      >
+      <div style={{ width: 150, height: 266, background: "#FAE5D3", borderRadius: 14, overflow: "hidden", position: "relative", boxShadow: "0 4px 20px rgba(27,43,75,0.12)" }}>
         <div style={{ position: "absolute", top: 8, left: 8, right: 8, display: "flex", gap: 3 }}>
           {[1, 0.35, 0.15].map((o, i) => <div key={i} style={{ flex: 1, height: 2, borderRadius: 1, background: `rgba(27,43,75,${o})` }}/>)}
         </div>
@@ -229,20 +178,10 @@ function MetaStory() {
   );
 }
 
-/* ── LinkedIn Ad ── */
 function LinkedInAd() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, width: "100%" }}>
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 380,
-          background: "white",
-          borderRadius: 8,
-          overflow: "hidden",
-          boxShadow: "0 2px 12px rgba(27,43,75,0.08)",
-        }}
-      >
+      <div style={{ width: "100%", maxWidth: 380, background: "white", borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 12px rgba(27,43,75,0.08)" }}>
         <div style={{ height: 180, background: "#F4EBD6", position: "relative", display: "flex", alignItems: "center", padding: "0 28px" }}>
           <div style={{ position: "absolute", right: -20, top: -20, width: 180, height: 180, borderRadius: "50%", background: "#FAE5D3", opacity: 0.7 }}/>
           <div style={{ position: "absolute", left: 20, bottom: 20, width: 80, height: 3, background: "#E2F0EE", borderRadius: 2 }}/>
@@ -257,9 +196,7 @@ function LinkedInAd() {
             <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 13, color: "#1B2B4B" }}>pare.com/reset</p>
             <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "#8C9BAD" }}>Lower-waste essentials, considered</p>
           </div>
-          <button style={{ border: "1.5px solid #E4DDD4", borderRadius: 5, padding: "6px 14px", fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 12, color: "#1B2B4B", background: "transparent", cursor: "default" }}>
-            Shop now
-          </button>
+          <button style={{ border: "1.5px solid #E4DDD4", borderRadius: 5, padding: "6px 14px", fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 12, color: "#1B2B4B", background: "transparent", cursor: "default" }}>Shop now</button>
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
@@ -270,25 +207,10 @@ function LinkedInAd() {
   );
 }
 
-/* ── Catalogue cover ── */
 function CatalogueCover() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-      <div
-        style={{
-          width: 168,
-          height: 237,
-          background: "#FAF8F5",
-          borderRadius: 6,
-          overflow: "hidden",
-          position: "relative",
-          boxShadow: "0 4px 20px rgba(27,43,75,0.12)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "20px 18px 16px",
-        }}
-      >
+      <div style={{ width: 168, height: 237, background: "#FAF8F5", borderRadius: 6, overflow: "hidden", position: "relative", boxShadow: "0 4px 20px rgba(27,43,75,0.12)", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "20px 18px 16px" }}>
         <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 10, background: "#E2F0EE" }}/>
         <div style={{ position: "absolute", right: -24, top: 40, width: 80, height: 80, borderRadius: "50%", background: "#FAE5D3", opacity: 0.5 }}/>
         <div style={{ position: "relative", zIndex: 1 }}>
@@ -316,84 +238,95 @@ function CatalogueCover() {
 }
 
 const SYSTEM_RULES = [
-  { label: "One headline", text: '"The Home Reset." — identical on every surface.' },
-  { label: "Three surfaces", text: "Cream, apricot, and mint. Never all three at once." },
-  { label: "Product on white", text: "Product imagery on white throughout. Editorial photography only for the hero." },
+  { label: "One headline",    text: '"The Home Reset." — identical on every surface.' },
+  { label: "Three surfaces",  text: "Cream, apricot, and mint. Never all three at once." },
+  { label: "Product on white",text: "Product imagery on white throughout. Editorial photography only for the hero." },
   { label: "Numeric savings", text: '"Save 10%" — always a number, never vague language.' },
-  { label: "Proof signals", text: "Repeat savings, B Corp references, explicit certifications." },
-  { label: "Type hierarchy", text: "Lora for the headline. Inter for everything else." },
+  { label: "Proof signals",   text: "Repeat savings, B Corp references, explicit certifications." },
+  { label: "Type hierarchy",  text: "Lora for the headline. Inter for everything else." },
 ];
 
 export default function Campaign() {
   return (
-    <section id="campaign" className="section-card" style={{ background: "var(--color-canvas)", padding: "120px 0" }}>
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px" }}>
+    <section id="campaign" className="section-card" style={{ background: "var(--color-canvas)", padding: "128px 0 140px" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px", position: "relative" }}>
 
-        <SectionReveal>
-          <div className="chapter-rule">
+        {/* Decorative number */}
+        <div aria-hidden style={{ position: "absolute", right: -40, top: -80, fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "28vw", lineHeight: 1, color: "var(--color-navy)", opacity: 0.025, pointerEvents: "none", userSelect: "none" }}>05</div>
+
+        <SectionReveal from="left">
+          <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 40 }}>
             <span style={T.label}>05</span>
+            <div style={{ flex: 1, height: 1, background: "var(--color-border)" }}/>
             <span style={T.label}>Campaign</span>
           </div>
-          <h2 style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(40px,5vw,56px)", lineHeight: 1.06, letterSpacing: "-0.02em", color: "var(--color-navy)", maxWidth: 580 }}>
+        </SectionReveal>
+
+        <SectionReveal delay={80}>
+          <h2 style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(48px,6.5vw,80px)", lineHeight: 1.02, letterSpacing: "-0.03em", color: "var(--color-navy)", maxWidth: 680, marginBottom: 24 }}>
             The Home Reset — one campaign, every surface.
           </h2>
-          <p style={{ ...T.body, maxWidth: 480, marginTop: 20 }}>
+        </SectionReveal>
+
+        <SectionReveal delay={140}>
+          <p style={{ ...T.body, maxWidth: 520 }}>
             A spring campaign built around a single idea: people want to reset their homes, not their values. Pare makes it possible to do both at once.
           </p>
         </SectionReveal>
 
-        {/* Hero visual */}
-        <SectionReveal delay={60}>
-          <div style={{ marginTop: 72 }}>
-            <CampaignVisual />
-          </div>
+        {/* Hero visual — biggest visual moment in the chapter */}
+        <SectionReveal delay={60} scale style={{ marginTop: 80 }}>
+          <CampaignVisual />
         </SectionReveal>
 
-        {/* Campaign assets */}
-        <SectionReveal delay={80}>
-          <div style={{ marginTop: 80 }}>
-            <p style={{ ...T.label, marginBottom: 48 }}>Campaign assets</p>
-            <div style={{ display: "flex", gap: 48, alignItems: "flex-start", flexWrap: "wrap" }}>
-              <Totem />
-              <MetaStory />
-              <div style={{ display: "flex", flexDirection: "column", gap: 32, flex: 1, minWidth: 200 }}>
-                <CatalogueCover />
-                <LinkedInAd />
-              </div>
-            </div>
-          </div>
+        {/* Campaign assets — each asset reveals from a direction */}
+        <SectionReveal from="left" style={{ marginTop: 96 }}>
+          <p style={{ ...T.label, marginBottom: 56 }}>Campaign assets</p>
         </SectionReveal>
+
+        <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
+          <SectionReveal from="left" delay={0}>
+            <Totem />
+          </SectionReveal>
+          <SectionReveal from="bottom" delay={80}>
+            <MetaStory />
+          </SectionReveal>
+          <div style={{ display: "flex", flexDirection: "column", gap: 40, flex: 1, minWidth: 200 }}>
+            <SectionReveal from="right" delay={0}>
+              <CatalogueCover />
+            </SectionReveal>
+            <SectionReveal from="right" delay={120}>
+              <LinkedInAd />
+            </SectionReveal>
+          </div>
+        </div>
 
         {/* QR + System rules */}
-        <SectionReveal delay={60}>
-          <div style={{ marginTop: 80, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
-            <div>
-              <p style={{ ...T.label, marginBottom: 24 }}>Campaign QR code</p>
-              <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-                <div style={{ background: "white", borderRadius: 8, padding: 8, flexShrink: 0 }}>
-                  <QR size={88} />
-                </div>
-                <div>
-                  <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 14, color: "var(--color-navy)", marginBottom: 8 }}>pare.com/reset</p>
-                  <p style={T.body}>The QR is the only digital CTA on physical assets. Scan and land on the campaign page — no app-store button, no typed URL.</p>
-                </div>
+        <div style={{ marginTop: 100, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
+          <SectionReveal from="left">
+            <p style={{ ...T.label, marginBottom: 24 }}>Campaign QR code</p>
+            <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+              <div style={{ background: "white", borderRadius: 8, padding: 8, flexShrink: 0 }}><QR size={88}/></div>
+              <div>
+                <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 14, color: "var(--color-navy)", marginBottom: 8 }}>pare.com/reset</p>
+                <p style={T.body}>The QR is the only digital CTA on physical assets. Scan and land on the campaign page — no app-store button, no typed URL.</p>
               </div>
             </div>
+          </SectionReveal>
 
-            <div>
-              <p style={{ ...T.label, marginBottom: 24 }}>System coherence</p>
-              {SYSTEM_RULES.map((r, i) => (
-                <div key={r.label} style={{ display: "flex", gap: 14, padding: "14px 0", borderTop: "1px solid var(--color-border)" }}>
-                  <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#2A9D8F", marginTop: 6, flexShrink: 0 }}/>
-                  <div>
-                    <span style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 14, color: "var(--color-navy)" }}>{r.label} </span>
-                    <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, color: "var(--color-subtle)", lineHeight: 1.55 }}>{r.text}</span>
-                  </div>
+          <SectionReveal from="right">
+            <p style={{ ...T.label, marginBottom: 24 }}>System coherence</p>
+            {SYSTEM_RULES.map((r, i) => (
+              <div key={r.label} style={{ display: "flex", gap: 14, padding: "14px 0", borderTop: "1px solid var(--color-border)" }}>
+                <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#2A9D8F", marginTop: 6, flexShrink: 0 }}/>
+                <div>
+                  <span style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 14, color: "var(--color-navy)" }}>{r.label} </span>
+                  <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, color: "var(--color-subtle)", lineHeight: 1.55 }}>{r.text}</span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </SectionReveal>
+              </div>
+            ))}
+          </SectionReveal>
+        </div>
 
       </div>
     </section>

@@ -57,7 +57,7 @@ export default function Hero() {
         <div style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(to right, #F7F3EB 0%, #F7F3EB 32%, rgba(247,243,235,0.88) 48%, rgba(247,243,235,0.3) 62%, transparent 74%)",
+          background: "linear-gradient(to right, rgba(247,243,235,0.4) 0%, rgba(247,243,235,0.38) 32%, rgba(247,243,235,0.22) 52%, transparent 68%)",
         }}/>
       </div>
 
@@ -78,8 +78,8 @@ export default function Hero() {
           <img src="/logo.svg" alt="Pare" style={{ width: 90, height: "auto" }}/>
         </div>
 
-        {/* Text block — pushed to lower vertical centre */}
-        <div style={{ marginTop: "auto" }}>
+        {/* Text block — vertically centred */}
+        <div style={{ marginTop: "22vh" }}>
 
           <p ref={labelRef} style={{
             fontFamily: "var(--font-inter-var)",

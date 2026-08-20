@@ -320,6 +320,9 @@ export default function Campaign() {
         >
           {[
             { src: "/kakemono-irl-1.png", label: "Street — shopping district" },
+            { src: "/kakemono-irl-2.png", label: "Interior — hotel lobby" },
+            { src: "/kakemono-irl-3.png", label: "Interior — exhibition fair" },
+            { src: "/kakemono-irl-4.png", label: "Interior — gallery" },
           ].map((p, i) => (
             <div key={i} style={{ flexShrink: 0, display: "flex", flexDirection: "column", gap: 14 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -62,16 +62,8 @@ export default function Nav() {
       }}
     >
       {/* Wordmark */}
-      <span style={{
-        fontFamily: "var(--font-lora-var)",
-        fontWeight: 600,
-        fontSize: 14,
-        letterSpacing: "-0.025em",
-        color: "var(--color-navy)",
-        marginRight: 8,
-      }}>
-        Pare
-      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/logo.svg" alt="Pare" style={{ width: 56, height: "auto", marginRight: 8 }}/>
 
       {/* Divider */}
       <div style={{ width: 1, height: 16, background: "var(--color-border)", flexShrink: 0 }}/>

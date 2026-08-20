@@ -138,7 +138,8 @@ export default function Reflection() {
             That&apos;s what Pare is. That&apos;s what this project tried to be.
           </p>
           <div style={{ marginTop: 80, display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 32 }}>
-            <span style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: 18, color: "rgba(255,255,255,0.18)", letterSpacing: "-0.03em" }}>Pare</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="Pare" style={{ width: 64, height: "auto", opacity: 0.18, filter: "brightness(0) invert(1)" }}/>
             <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "rgba(255,255,255,0.18)", letterSpacing: "0.08em" }}>CASE STUDY · 2025</span>
           </div>
         </div>

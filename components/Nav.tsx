@@ -41,55 +41,63 @@ export default function Nav() {
       aria-label="Chapter navigation"
       style={{
         position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
+        top: 20,
+        left: "50%",
+        transform: `translateX(-50%) translateY(${visible ? "0" : "-16px"})`,
         zIndex: 100,
-        height: 44,
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 64px",
-        background: "rgba(250,248,245,0.95)",
-        backdropFilter: "blur(12px)",
-        borderBottom: "1px solid var(--color-border)",
+        gap: 8,
+        padding: "0 6px 0 16px",
+        height: 44,
+        background: "rgba(250,248,245,0.92)",
+        backdropFilter: "blur(16px)",
+        borderRadius: 10,
+        border: "1px solid var(--color-border)",
+        boxShadow: "0 4px 32px rgba(27,43,75,0.10), 0 1px 4px rgba(27,43,75,0.06)",
         opacity: visible ? 1 : 0,
         pointerEvents: visible ? "auto" : "none",
-        transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1)",
+        transition: "opacity 0.45s cubic-bezier(0.16,1,0.3,1), transform 0.45s cubic-bezier(0.16,1,0.3,1)",
+        whiteSpace: "nowrap",
       }}
     >
+      {/* Wordmark */}
       <span style={{
         fontFamily: "var(--font-lora-var)",
         fontWeight: 600,
         fontSize: 14,
         letterSpacing: "-0.025em",
         color: "var(--color-navy)",
+        marginRight: 8,
       }}>
         Pare
       </span>
 
-      <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
-        {CHAPTERS.map(({ id, n }) => (
-          <button
-            key={id}
-            onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })}
-            style={{
-              fontFamily: "var(--font-inter-var)",
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: "0.1em",
-              color: active === id ? "var(--color-teal)" : "var(--color-muted)",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              transition: "color 0.25s",
-            }}
-          >
-            {n}
-          </button>
-        ))}
-      </div>
+      {/* Divider */}
+      <div style={{ width: 1, height: 16, background: "var(--color-border)", flexShrink: 0 }}/>
+
+      {/* Chapter numbers */}
+      {CHAPTERS.map(({ id, n }) => (
+        <button
+          key={id}
+          onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })}
+          style={{
+            fontFamily: "var(--font-inter-var)",
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: "0.08em",
+            color: active === id ? "var(--color-teal)" : "var(--color-muted)",
+            background: active === id ? "rgba(42,157,143,0.08)" : "transparent",
+            border: "none",
+            cursor: "pointer",
+            padding: "6px 10px",
+            borderRadius: 6,
+            transition: "color 0.2s, background 0.2s",
+          }}
+        >
+          {n}
+        </button>
+      ))}
     </nav>
   );
 }

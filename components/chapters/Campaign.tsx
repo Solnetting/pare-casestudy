@@ -260,6 +260,49 @@ export default function Campaign() {
         </div>
       </div>
 
+      {/* ── Kakemono posters ── */}
+      <div style={{ padding: "96px 0 0" }}>
+        <SectionReveal>
+          <div style={{ padding: "0 80px", marginBottom: 48 }}>
+            <p style={{ ...L(), marginBottom: 12 }}>Kakemono posters</p>
+            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, lineHeight: 1.65, color: "var(--color-subtle)", maxWidth: 480 }}>
+              Five colourway variations for in-store and event display. Same message, adapted for each environment.
+            </p>
+          </div>
+        </SectionReveal>
+        <div
+          className="flow-scroll"
+          style={{ display: "flex", gap: 16, paddingLeft: 80, paddingRight: 80, paddingBottom: 8 }}
+        >
+          {[
+            { src: "/kakemono-1.png", label: "Cream — day" },
+            { src: "/kakemono-2.png", label: "Navy — evening" },
+            { src: "/kakemono-3.png", label: "Arch — neutral" },
+            { src: "/kakemono-4.png", label: "Warm — apricot" },
+            { src: "/kakemono-5.png", label: "Teal accent" },
+          ].map((p, i) => (
+            <div key={i} style={{ flexShrink: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.src}
+                alt={p.label}
+                style={{
+                  height: 580,
+                  width: "auto",
+                  borderRadius: 6,
+                  display: "block",
+                  boxShadow: "0 12px 48px rgba(27,43,75,0.16), 0 2px 8px rgba(27,43,75,0.06)",
+                }}
+              />
+              <div>
+                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, fontWeight: 500, color: "var(--color-navy)" }}>{p.label}</p>
+                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "var(--color-muted)", marginTop: 2 }}>600 × 1800mm</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── QR + System rules ── */}
       <div style={{ padding: "96px 80px 140px" }}>
         <SectionReveal>

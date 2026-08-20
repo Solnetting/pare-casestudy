@@ -50,6 +50,31 @@ body {
 }
 .flow-scroll::-webkit-scrollbar { display: none; }
 
+/* ── Hero carousel ─────────────────────────────────────────── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes progressFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.slide-text .slide-label  { animation: slideUp 0.75s 0.12s cubic-bezier(0.16,1,0.3,1) both; }
+.slide-text .slide-line-1 { animation: slideUp 0.85s 0.24s cubic-bezier(0.16,1,0.3,1) both; }
+.slide-text .slide-line-2 { animation: slideUp 0.85s 0.36s cubic-bezier(0.16,1,0.3,1) both; }
+.slide-text .slide-line-3 { animation: slideUp 0.85s 0.48s cubic-bezier(0.16,1,0.3,1) both; }
+.slide-text .slide-body   { animation: slideUp 0.75s 0.60s cubic-bezier(0.16,1,0.3,1) both; }
+
+.progress-fill {
+  height: 100%;
+  background: #1a7a70;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: progressFill 5s linear forwards;
+}
+
 /* Hero CTA — left-to-right swipe on hover */
 .btn-swipe {
   position: relative;

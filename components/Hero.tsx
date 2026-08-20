@@ -110,31 +110,19 @@ export default function Hero() {
             fontSize: "clamp(15px, 1.25vw, 20px)",
             lineHeight: 1.65,
             color: "#53657a",
-            maxWidth: 400,
+            maxWidth: 460,
             marginBottom: 48,
           }}>
-            A considered edit of verified, lower-impact<br/>
-            products from trusted makers.
+            A considered edit of verified, lower-impact products from trusted makers.
           </p>
 
           <div ref={ctaRef}>
             <button
+              className="btn-swipe"
               onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" })}
-              style={{
-                background: "#1a7a70",
-                color: "white",
-                border: "none",
-                borderRadius: 8,
-                padding: "0 24px",
-                height: 44,
-                fontFamily: "var(--font-inter-var)",
-                fontSize: 14,
-                fontWeight: 600,
-                cursor: "pointer",
-                letterSpacing: "0.01em",
-              }}
+              style={{ fontFamily: "var(--font-inter-var)" }}
             >
-              Explore more
+              <span>Explore more</span>
             </button>
           </div>
         </div>

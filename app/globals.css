@@ -50,6 +50,50 @@ body {
 }
 .flow-scroll::-webkit-scrollbar { display: none; }
 
+/* Hero CTA — left-to-right swipe on hover */
+.btn-swipe {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 24px;
+  background: #1a7a70;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: color 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+.btn-swipe::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -12%;
+  width: 124%;
+  height: 100%;
+  background: #F7F3EB;
+  transform: translateX(-100%) skewX(-12deg);
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+  z-index: 0;
+}
+
+.btn-swipe:hover::before {
+  transform: translateX(0) skewX(-12deg);
+}
+
+.btn-swipe:hover { color: #1a7a70; }
+
+.btn-swipe > span {
+  position: relative;
+  z-index: 1;
+}
+
 .frame-shadow {
   box-shadow:
     0 0 0 1px rgba(27,43,75,0.07),

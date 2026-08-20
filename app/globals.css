@@ -61,11 +61,9 @@ body {
   to   { transform: scaleX(1); }
 }
 
-.slide-text .slide-label  { animation: slideUp 0.75s 0.12s cubic-bezier(0.16,1,0.3,1) both; }
-.slide-text .slide-line-1 { animation: slideUp 0.85s 0.24s cubic-bezier(0.16,1,0.3,1) both; }
-.slide-text .slide-line-2 { animation: slideUp 0.85s 0.36s cubic-bezier(0.16,1,0.3,1) both; }
-.slide-text .slide-line-3 { animation: slideUp 0.85s 0.48s cubic-bezier(0.16,1,0.3,1) both; }
-.slide-text .slide-body   { animation: slideUp 0.75s 0.60s cubic-bezier(0.16,1,0.3,1) both; }
+.slide-text .slide-label    { animation: slideUp 0.7s 0.08s cubic-bezier(0.16,1,0.3,1) both; }
+.slide-text .slide-headline { animation: slideUp 0.8s 0.22s cubic-bezier(0.16,1,0.3,1) both; }
+.slide-text .slide-body     { animation: slideUp 0.7s 0.38s cubic-bezier(0.16,1,0.3,1) both; }
 
 .progress-fill {
   height: 100%;

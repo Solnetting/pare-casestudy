@@ -132,14 +132,13 @@ export default function Hero() {
                   letterSpacing: "0.14em", textTransform: "uppercase", color: "#197f78", marginBottom: 22,
                 }}>{slide.label}</p>
 
-                <h1 style={{
+                <h1 className="slide-headline" style={{
                   fontFamily: "var(--font-lora-var)", fontWeight: 700,
                   fontSize: "clamp(38px, 4.5vw, 76px)", lineHeight: 1.06,
                   letterSpacing: "-0.03em", color: "#203552", margin: "0 0 36px",
                 }}>
-                  <span className="slide-line-1" style={{ display: "block" }}>{slide.lines[0]}</span>
-                  <span className="slide-line-2" style={{ display: "block" }}>{slide.lines[1]}</span>
-                  {slide.lines[2] && <span className="slide-line-3" style={{ display: "block" }}>{slide.lines[2]}</span>}
+                  {slide.lines[0]}<br/>
+                  {slide.lines[1]}{slide.lines[2] && <><br/>{slide.lines[2]}</>}
                 </h1>
 
                 <p className="slide-body" style={{

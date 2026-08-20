@@ -270,6 +270,26 @@ export default function Campaign() {
         </div>
       </div>
 
+      {/* ── Product catalog ── */}
+      <div style={{ padding: "96px 80px 0" }}>
+        <SectionReveal>
+          <div style={{ marginBottom: 48 }}>
+            <p style={{ ...L(), marginBottom: 12 }}>Product catalog</p>
+            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, lineHeight: 1.65, color: "var(--color-subtle)", maxWidth: 480 }}>
+              A4 double-spread layout for print and digital distribution. Product photography on white, Repeat pricing highlighted throughout.
+            </p>
+          </div>
+        </SectionReveal>
+        <SectionReveal>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/product-catalog.png"
+            alt="Product catalog"
+            style={{ width: "100%", borderRadius: 8, display: "block", boxShadow: "0 16px 64px rgba(27,43,75,0.14), 0 2px 8px rgba(27,43,75,0.06)" }}
+          />
+        </SectionReveal>
+      </div>
+
       {/* ── Kakemono posters ── */}
       <div style={{ padding: "96px 0 0" }}>
         <SectionReveal>

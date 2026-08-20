@@ -90,6 +90,31 @@ export default function Nav() {
           {n}
         </button>
       ))}
+
+      {/* Divider */}
+      <div style={{ width: 1, height: 16, background: "var(--color-border)", flexShrink: 0 }}/>
+
+      {/* Prototype link */}
+      <a
+        href="https://pare-lurwwo3yh-carlosmeradesign-3615s-projects.vercel.app"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          fontFamily: "var(--font-inter-var)",
+          fontSize: 11,
+          fontWeight: 600,
+          letterSpacing: "0.06em",
+          color: "var(--color-teal)",
+          background: "rgba(42,157,143,0.08)",
+          border: "1px solid rgba(42,157,143,0.2)",
+          padding: "6px 12px",
+          borderRadius: 6,
+          textDecoration: "none",
+          whiteSpace: "nowrap",
+        }}
+      >
+        Try prototype →
+      </a>
     </nav>
   );
 }

@@ -4,22 +4,28 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const SLIDES = [
   {
-    label: "Curated Everyday",
-    lines: ["Make sustainable", "choices the easy", "default."],
-    body: "A considered edit of verified, lower-impact products from trusted makers.",
+    label: "The Curated Selection",
+    lines: ["Less searching.", "Better choosing.", null],
+    body: "One considered selection, with clearer proof behind every choice.",
+    cta: "Explore more",
+    img: "/hero-slide-1.png",
     imgPos: "60% center",
   },
   {
-    label: "Repeat & Save",
-    lines: ["Restock what", "you love,", "automatically."],
-    body: "Subscribe to everyday essentials and save 10% on every refill, delivered on your schedule.",
-    imgPos: "45% center",
+    label: "Products With Proof",
+    lines: ["Know what", "makes it", "better."],
+    body: "Materials, origins, and claims made clear before you choose.",
+    cta: "See the proof",
+    img: "/hero-slide-2.png",
+    imgPos: "55% center",
   },
   {
-    label: "Lower Impact",
-    lines: ["The easier", "choice is the", "better one."],
-    body: "Every product verified for environmental and ethical standards — so you don't have to check.",
-    imgPos: "70% 30%",
+    label: "The Repeat Edit",
+    lines: ["The essentials", "you come back", "to."],
+    body: "Refillable formats and flexible repeat delivery, when you need it.",
+    cta: "Build your repeat",
+    img: "/hero-slide-3.png",
+    imgPos: "60% center",
   },
 ];
 
@@ -79,7 +85,7 @@ export default function Hero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/hero-bg.png"
+            src={slide.img}
             alt=""
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: slide.imgPos }}
           />
@@ -133,7 +139,7 @@ export default function Hero() {
                 }}>
                   <span className="slide-line-1" style={{ display: "block" }}>{slide.lines[0]}</span>
                   <span className="slide-line-2" style={{ display: "block" }}>{slide.lines[1]}</span>
-                  <span className="slide-line-3" style={{ display: "block" }}>{slide.lines[2]}</span>
+                  {slide.lines[2] && <span className="slide-line-3" style={{ display: "block" }}>{slide.lines[2]}</span>}
                 </h1>
 
                 <p className="slide-body" style={{
@@ -153,7 +159,7 @@ export default function Hero() {
             onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" })}
             style={{ fontFamily: "var(--font-inter-var)" }}
           >
-            <span>Explore more</span>
+            <span>{SLIDES[current].cta}</span>
           </button>
         </div>
 

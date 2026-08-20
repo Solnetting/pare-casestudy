@@ -1,98 +1,48 @@
 import SectionReveal from "@/components/ui/SectionReveal";
 
-const T = {
-  label: { fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: "var(--color-muted)" },
-  body:  { fontFamily: "var(--font-inter-var)", fontSize: 15, lineHeight: 1.7, color: "var(--color-subtle)" } as React.CSSProperties,
-};
+const L = (color = "var(--color-muted)") => ({
+  fontFamily: "var(--font-inter-var)" as const,
+  fontSize: 11,
+  fontWeight: 500,
+  letterSpacing: "0.12em",
+  textTransform: "uppercase" as const,
+  color,
+});
 
 const COLOURS = [
-  { name: "Canvas",  hex: "#FAF8F5", role: "Page ground",      border: true },
-  { name: "Navy",    hex: "#1B2B4B", role: "Text + authority", border: false },
-  { name: "Teal",    hex: "#2A9D8F", role: "Action",           border: false },
-  { name: "Cream",   hex: "#F4EBD6", role: "Warm surface",     border: false },
-  { name: "Mint",    hex: "#E2F0EE", role: "Cool surface",     border: false },
-  { name: "Apricot", hex: "#FAE5D3", role: "Campaign surface", border: false },
-  { name: "Border",  hex: "#E4DDD4", role: "Dividers",         border: false },
-  { name: "Muted",   hex: "#8C9BAD", role: "Secondary text",   border: false },
-];
-
-const SEMANTIC = [
-  { token: "Surface / page",   resolves: "Canvas",  usage: "All page backgrounds" },
-  { token: "Surface / card",   resolves: "White",   usage: "Elevated content" },
-  { token: "Surface / warm",   resolves: "Cream",   usage: "Editorial sections" },
-  { token: "Text / primary",   resolves: "Navy",    usage: "All body and heading copy" },
-  { token: "Text / secondary", resolves: "Muted",   usage: "Labels, metadata, captions" },
-  { token: "Action / default", resolves: "Teal",    usage: "CTAs, links, Repeat cue" },
-  { token: "Action / hover",   resolves: "#1E7A6E", usage: "Hover / pressed state" },
-  { token: "Repeat / surface", resolves: "Mint",    usage: "Repeat mode, Repeat badges" },
+  { name: "Canvas",  hex: "#FAF8F5", role: "Page ground",      dark: false, border: true },
+  { name: "Navy",    hex: "#1B2B4B", role: "Text + authority", dark: true },
+  { name: "Teal",    hex: "#2A9D8F", role: "Action",           dark: true },
+  { name: "Cream",   hex: "#F4EBD6", role: "Warm surface",     dark: false },
+  { name: "Mint",    hex: "#E2F0EE", role: "Cool surface",     dark: false },
+  { name: "Apricot", hex: "#FAE5D3", role: "Campaign surface", dark: false },
+  { name: "Border",  hex: "#E4DDD4", role: "Dividers",         dark: false },
+  { name: "Muted",   hex: "#8C9BAD", role: "Secondary text",   dark: false },
 ];
 
 const TYPE_SCALE = [
   { px: 64, w: "600", family: "Lora",  usage: "Hero / Display",  sample: "Make the better choice." },
   { px: 48, w: "600", family: "Lora",  usage: "Chapter H2",      sample: "The Home Reset." },
   { px: 32, w: "600", family: "Lora",  usage: "Section H3",      sample: "Curated to matter." },
-  { px: 28, w: "600", family: "Lora",  usage: "Card heading",    sample: "Refillable Dish Soap" },
   { px: 24, w: "600", family: "Lora",  usage: "Pull quote",      sample: "Pare down to what matters." },
   { px: 18, w: "400", family: "Inter", usage: "Body / lead",     sample: "Everyday essentials, considered." },
-  { px: 16, w: "400", family: "Inter", usage: "Body / default",  sample: "500ml · Concentrated formula" },
-  { px: 14, w: "500", family: "Inter", usage: "UI / action",     sample: "Add to repeat order" },
-  { px: 12, w: "500", family: "Inter", usage: "UI / label",      sample: "KITCHEN · CLEANING" },
+  { px: 15, w: "400", family: "Inter", usage: "Body / default",  sample: "500ml · Concentrated formula" },
+  { px: 13, w: "500", family: "Inter", usage: "UI / action",     sample: "Add to repeat order" },
+  { px: 11, w: "500", family: "Inter", usage: "UI / label",      sample: "KITCHEN · CLEANING" },
 ];
 
 const SPACING = [4, 8, 16, 24, 32, 40, 48, 64, 80, 96, 128];
 
-function PrimaryBtn() {
-  return <button style={{ background: "#2A9D8F", color: "white", border: "none", borderRadius: 6, padding: "12px 24px", fontFamily: "var(--font-inter-var)", fontSize: 14, fontWeight: 600, cursor: "default" }}>Add to bag</button>;
-}
-function SecondaryBtn() {
-  return <button style={{ background: "transparent", color: "#1B2B4B", border: "1.5px solid #1B2B4B", borderRadius: 6, padding: "11px 24px", fontFamily: "var(--font-inter-var)", fontSize: 14, fontWeight: 500, cursor: "default" }}>Continue shopping</button>;
-}
-function TertiaryBtn() {
-  return <button style={{ background: "transparent", color: "#2A9D8F", border: "none", padding: "0", fontFamily: "var(--font-inter-var)", fontSize: 14, fontWeight: 500, display: "flex", alignItems: "center", gap: 6, cursor: "default" }}>See all products <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg></button>;
-}
-function ProductCard() {
-  return (
-    <div style={{ width: 188, border: "1px solid #E4DDD4", borderRadius: 10, overflow: "hidden", background: "white" }}>
-      <div style={{ height: 110, background: "#F4EBD6", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 48, height: 48, borderRadius: 6, background: "white" }}/>
-      </div>
-      <div style={{ padding: "12px 14px 14px" }}>
-        <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 14, color: "#1B2B4B", marginBottom: 2 }}>Refillable Dish Soap</p>
-        <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, color: "#8C9BAD" }}>500ml · Concentrated</p>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 10 }}>
-          <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 700, fontSize: 16, color: "#2A9D8F" }}>£8.09</p>
-          <span style={{ fontSize: 11, color: "#2A9D8F", fontWeight: 600, background: "#E2F0EE", padding: "2px 8px", borderRadius: 4, fontFamily: "var(--font-inter-var)" }}>Repeat</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-function SearchField() {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10, border: "1.5px solid #E4DDD4", borderRadius: 8, padding: "10px 14px", width: 260, background: "white" }}>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8C9BAD" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, color: "#8C9BAD" }}>Search products…</span>
-    </div>
-  );
-}
-function BottomNavComp() {
-  return (
-    <div style={{ display: "flex", border: "1.5px solid #E4DDD4", borderRadius: 8, overflow: "hidden", width: 300, background: "white" }}>
-      {["Home", "Products", "Bag", "Profile"].map((item, i) => (
-        <div key={item} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", padding: "10px 0", borderLeft: i > 0 ? "1px solid #F0EDE8" : "none" }}>
-          <div style={{ width: 16, height: 16, borderRadius: 3, background: i === 0 ? "#2A9D8F" : "#E4DDD4", marginBottom: 4 }}/>
-          <span style={{ fontSize: 10, fontFamily: "var(--font-inter-var)", color: i === 0 ? "#2A9D8F" : "#8C9BAD", fontWeight: i === 0 ? 500 : 400 }}>{item}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
+function PrimaryBtn()   { return <button style={{ background: "#2A9D8F", color: "white", border: "none", borderRadius: 6, padding: "12px 24px", fontFamily: "var(--font-inter-var)", fontSize: 14, fontWeight: 600, cursor: "default" }}>Add to bag</button>; }
+function SecondaryBtn() { return <button style={{ background: "transparent", color: "#1B2B4B", border: "1.5px solid #1B2B4B", borderRadius: 6, padding: "11px 24px", fontFamily: "var(--font-inter-var)", fontSize: 14, fontWeight: 500, cursor: "default" }}>Continue shopping</button>; }
+function TertiaryBtn()  { return <button style={{ background: "transparent", color: "#2A9D8F", border: "none", fontFamily: "var(--font-inter-var)", fontSize: 14, fontWeight: 500, display: "flex", alignItems: "center", gap: 6, cursor: "default" }}>See all <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg></button>; }
+
 function RepeatCue() {
   return (
-    <div style={{ border: "1px solid #C8E4E0", borderRadius: 8, padding: "16px 20px", background: "#E2F0EE", maxWidth: 300 }}>
+    <div style={{ border: "1px solid #C8E4E0", borderRadius: 8, padding: "16px 20px", background: "#E2F0EE", maxWidth: 280 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
         <span style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 14, color: "#2A9D8F" }}>Pare Repeat</span>
-        <span style={{ background: "#2A9D8F", color: "white", fontSize: 11, fontWeight: 600, padding: "2px 8px", borderRadius: 4, fontFamily: "var(--font-inter-var)" }}>Save 10%</span>
+        <span style={{ background: "#2A9D8F", color: "white", fontSize: 11, fontWeight: 600, padding: "2px 8px", borderRadius: 4 }}>Save 10%</span>
       </div>
       <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, color: "#6B7A8A", lineHeight: 1.5 }}>Subscribe and save on every delivery. Pause or cancel anytime.</p>
       <div style={{ marginTop: 10, display: "flex", alignItems: "baseline", gap: 8 }}>
@@ -102,6 +52,7 @@ function RepeatCue() {
     </div>
   );
 }
+
 function ProofLabels() {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
@@ -112,135 +63,140 @@ function ProofLabels() {
   );
 }
 
+function ProductCard() {
+  return (
+    <div style={{ width: 180, border: "1px solid #E4DDD4", borderRadius: 8, overflow: "hidden", background: "white" }}>
+      <div style={{ height: 100, background: "#F4EBD6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 44, height: 44, borderRadius: 5, background: "white" }}/>
+      </div>
+      <div style={{ padding: "12px 14px 14px" }}>
+        <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 13, color: "#1B2B4B", marginBottom: 2 }}>Refillable Dish Soap</p>
+        <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "#8C9BAD", marginBottom: 10 }}>500ml · Concentrated</p>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 700, fontSize: 15, color: "#2A9D8F" }}>£8.09</p>
+          <span style={{ fontSize: 11, color: "#2A9D8F", fontWeight: 600, background: "#E2F0EE", padding: "2px 8px", borderRadius: 4 }}>Repeat</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const COMPONENTS = [
-  { title: "Buttons",         note: "Three levels of emphasis. Rounded at 6px — not pills.",            demo: <div style={{ display: "flex", alignItems: "center", gap: 16 }}><PrimaryBtn/><SecondaryBtn/><TertiaryBtn/></div> },
-  { title: "Product card",    note: "Name, price, Repeat cue — in that order. Imagery on white only.", demo: <ProductCard/> },
-  { title: "Search field",    note: "Inside Products tab. Search is browsing, not navigation.",         demo: <SearchField/> },
-  { title: "Bottom nav",      note: "Four permanent tabs. Active state in teal.",                       demo: <BottomNavComp/> },
-  { title: "Pare Repeat cue", note: "Mint surface. Clear recurring price, cadence, and annual saving.", demo: <RepeatCue/> },
-  { title: "Proof labels",    note: "Mint background, teal text. Informative, not decorative.",         demo: <ProofLabels/> },
+  { title: "Buttons",         note: "Three levels. 6px radius — not pills.",            demo: <div style={{ display: "flex", alignItems: "center", gap: 16 }}><PrimaryBtn/><SecondaryBtn/><TertiaryBtn/></div> },
+  { title: "Product card",    note: "Name, price, Repeat badge — in that order.",       demo: <ProductCard/> },
+  { title: "Pare Repeat cue", note: "Mint surface. Price, cadence, annual saving.",     demo: <RepeatCue/> },
+  { title: "Proof labels",    note: "Mint background, teal text. Informative, not deco.",demo: <ProofLabels/> },
 ];
 
 export default function DesignSystem() {
   return (
-    <section id="design-system" className="section-card" style={{ background: "var(--color-mint)", padding: "128px 0 140px" }}>
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px", position: "relative" }}>
+    <section id="design-system" style={{ background: "var(--color-mint)" }}>
 
-        {/* Decorative number */}
-        <div aria-hidden style={{ position: "absolute", right: -40, top: -80, fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "28vw", lineHeight: 1, color: "var(--color-teal)", opacity: 0.06, pointerEvents: "none", userSelect: "none" }}>03</div>
-
-        <SectionReveal from="left">
-          <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 40 }}>
-            <span style={T.label}>03</span>
-            <div style={{ flex: 1, height: 1, background: "rgba(27,43,75,0.1)" }}/>
-            <span style={T.label}>Design System</span>
+      {/* ── Chapter header ── */}
+      <div style={{ borderTop: "1px solid rgba(27,43,75,0.12)", padding: "48px 80px 0" }}>
+        <SectionReveal>
+          <div style={{ display: "flex", alignItems: "center", gap: 20, paddingBottom: 48, borderBottom: "1px solid rgba(27,43,75,0.12)" }}>
+            <span style={L("var(--color-teal)")}>03</span>
+            <div style={{ flex: 1, height: 1, background: "rgba(27,43,75,0.12)" }}/>
+            <span style={L()}>Design System</span>
           </div>
         </SectionReveal>
+      </div>
 
-        <SectionReveal delay={80}>
-          <h2 style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(48px,6.5vw,80px)", lineHeight: 1.02, letterSpacing: "-0.03em", color: "var(--color-navy)", maxWidth: 640, marginBottom: 16 }}>
-            Trust, without overwhelming the shop.
+      {/* ── Headline ── */}
+      <div style={{ padding: "72px 80px 0" }}>
+        <SectionReveal>
+          <h2 style={{
+            fontFamily: "var(--font-lora-var)",
+            fontWeight: 600,
+            fontSize: "clamp(52px, 7vw, 96px)",
+            lineHeight: 1.0,
+            letterSpacing: "-0.04em",
+            color: "var(--color-navy)",
+            maxWidth: "80%",
+          }}>
+            Trust, without<br/>overwhelming the shop.
           </h2>
         </SectionReveal>
+      </div>
 
-        <SectionReveal delay={140}>
-          <p style={{ ...T.body, maxWidth: 480, marginBottom: 0 }}>
-            Every token — colour, type, spacing — exists to reduce ambiguity inside the team and friction inside the product.
-          </p>
-        </SectionReveal>
-
-        {/* Colour strip */}
-        <SectionReveal delay={60} style={{ marginTop: 96 }}>
-          <p style={{ ...T.label, marginBottom: 24 }}>Colour tokens</p>
-          <div style={{ display: "flex", height: 72, borderRadius: 8, overflow: "hidden", marginBottom: 24 }}>
-            {COLOURS.map(c => (
-              <div key={c.name} style={{ flex: 1, background: c.hex, border: c.border ? "1px solid #E4DDD4" : "none" }}/>
-            ))}
-          </div>
-        </SectionReveal>
-
-        {/* Swatch labels — each one reveals individually */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(8,1fr)", gap: 0, marginBottom: 80 }}>
-          {COLOURS.map((c, i) => (
-            <SectionReveal key={c.name} delay={i * 50} from="bottom">
-              <div style={{ borderRight: i < 7 ? "1px solid rgba(27,43,75,0.1)" : "none", paddingRight: 12, paddingLeft: i > 0 ? 12 : 0 }}>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, fontWeight: 600, color: "var(--color-navy)", marginBottom: 2 }}>{c.name}</p>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "var(--color-muted)" }}>{c.hex}</p>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 10, color: "var(--color-subtle)", marginTop: 2 }}>{c.role}</p>
-              </div>
-            </SectionReveal>
+      {/* ── Colour strip — full bleed ── */}
+      <SectionReveal style={{ marginTop: 80 }}>
+        <div style={{ display: "flex", height: 80 }}>
+          {COLOURS.map(c => (
+            <div key={c.name} style={{ flex: 1, background: c.hex, borderRight: c.border ? "1px solid rgba(27,43,75,0.08)" : "none" }}/>
           ))}
         </div>
-
-        {/* Semantic tokens */}
-        <SectionReveal from="left" style={{ marginBottom: 80 }}>
-          <p style={{ ...T.label, marginBottom: 24 }}>Semantic tokens</p>
-          <div style={{ background: "white", borderRadius: 8, overflow: "hidden" }}>
-            <div style={{ borderBottom: "1px solid var(--color-border)", padding: "14px 24px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 24 }}>
-              {["Token", "Resolves to", "Usage"].map(h => <p key={h} style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 600, color: "var(--color-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{h}</p>)}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(8,1fr)", borderBottom: "1px solid rgba(27,43,75,0.12)" }}>
+          {COLOURS.map((c, i) => (
+            <div key={c.name} style={{ padding: "20px 20px", borderRight: i < 7 ? "1px solid rgba(27,43,75,0.1)" : "none" }}>
+              <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 12, color: "var(--color-navy)", marginBottom: 2 }}>{c.name}</p>
+              <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 10, color: "var(--color-muted)", marginBottom: 2 }}>{c.hex}</p>
+              <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 10, color: "var(--color-subtle)", lineHeight: 1.5 }}>{c.role}</p>
             </div>
-            {SEMANTIC.map((t, i) => (
-              <div key={t.token} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 24, padding: "14px 24px", borderBottom: i < SEMANTIC.length - 1 ? "1px solid var(--color-border)" : "none", alignItems: "center" }}>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, fontWeight: 500, color: "var(--color-navy)" }}>{t.token}</p>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, color: "var(--color-subtle)" }}>{t.resolves}</p>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, color: "var(--color-subtle)" }}>{t.usage}</p>
-              </div>
-            ))}
-          </div>
-        </SectionReveal>
+          ))}
+        </div>
+      </SectionReveal>
 
-        {/* Type ramp */}
-        <SectionReveal from="right" style={{ marginBottom: 80 }}>
-          <p style={{ ...T.label, marginBottom: 32 }}>Typography system — Lora + Inter</p>
-          <div style={{ background: "white", borderRadius: 8, overflow: "hidden" }}>
+      {/* ── Type specimen ── */}
+      <div style={{ padding: "96px 80px 0" }}>
+        <SectionReveal>
+          <p style={{ ...L(), marginBottom: 48 }}>Typography system — Lora + Inter</p>
+        </SectionReveal>
+        <SectionReveal>
+          <div style={{ borderTop: "1px solid rgba(27,43,75,0.12)", background: "rgba(255,255,255,0.5)" }}>
             {TYPE_SCALE.map((t, i) => (
-              <div key={t.px} style={{ padding: "20px 24px", borderBottom: i < TYPE_SCALE.length - 1 ? "1px solid var(--color-border)" : "none", display: "grid", gridTemplateColumns: "120px 1fr", gap: 24, alignItems: "center" }}>
+              <div key={t.px} style={{ display: "grid", gridTemplateColumns: "160px 1fr", padding: "20px 0 20px 24px", borderBottom: i < TYPE_SCALE.length - 1 ? "1px solid rgba(27,43,75,0.08)" : "none", alignItems: "center" }}>
                 <div>
-                  <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "var(--color-muted)", marginBottom: 2 }}>{t.px}px / {t.family}</p>
+                  <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 10, color: "var(--color-muted)", marginBottom: 2 }}>{t.px}px / {t.family}</p>
                   <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 10, color: "var(--color-muted)" }}>{t.usage}</p>
                 </div>
-                <p style={{ fontSize: Math.min(t.px, 44), fontWeight: t.w, fontFamily: t.family === "Lora" ? "var(--font-lora-var), serif" : "var(--font-inter-var), sans-serif", color: "var(--color-navy)", lineHeight: 1.15, letterSpacing: t.px >= 28 ? "-0.02em" : "normal", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: t.px > 28 ? "nowrap" : "normal" }}>
+                <p style={{ fontSize: Math.min(t.px, 48), fontWeight: t.w, fontFamily: t.family === "Lora" ? "var(--font-lora-var), serif" : "var(--font-inter-var), sans-serif", color: "var(--color-navy)", lineHeight: 1.1, letterSpacing: t.px >= 24 ? "-0.025em" : "normal", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: t.px > 18 ? "nowrap" : "normal" }}>
                   {t.sample}
                 </p>
               </div>
             ))}
           </div>
         </SectionReveal>
+      </div>
 
-        {/* Spacing */}
-        <SectionReveal delay={60} style={{ marginBottom: 80 }}>
-          <p style={{ ...T.label, marginBottom: 24 }}>8px spacing rhythm</p>
-          <div style={{ background: "white", borderRadius: 8, padding: "32px 28px", display: "flex", alignItems: "flex-end", gap: 20 }}>
+      {/* ── Spacing ── */}
+      <div style={{ padding: "96px 80px 0" }}>
+        <SectionReveal>
+          <p style={{ ...L(), marginBottom: 40 }}>8px spacing rhythm</p>
+          <div style={{ borderTop: "1px solid rgba(27,43,75,0.12)", paddingTop: 48, display: "flex", alignItems: "flex-end", gap: 24 }}>
             {SPACING.map((s, i) => (
-              <SectionReveal key={s} delay={i * 40} from="bottom">
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, flexShrink: 0 }}>
-                  <div style={{ width: Math.max(s * 0.45, 6), height: Math.max(s * 0.45, 6), background: "#2A9D8F", borderRadius: 2 }}/>
+              <SectionReveal key={s} delay={i * 35} from="bottom">
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: Math.max(s * 0.5, 6), height: Math.max(s * 0.5, 6), background: "#2A9D8F", opacity: 0.6 + (i * 0.04) }}/>
                   <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 10, color: "var(--color-muted)" }}>{s}</span>
                 </div>
               </SectionReveal>
             ))}
           </div>
         </SectionReveal>
+      </div>
 
-        {/* Components */}
-        <SectionReveal from="left">
-          <p style={{ ...T.label, marginBottom: 40 }}>Component library</p>
+      {/* ── Components ── */}
+      <div style={{ padding: "96px 80px 140px" }}>
+        <SectionReveal>
+          <p style={{ ...L(), marginBottom: 48 }}>Component library</p>
         </SectionReveal>
         {COMPONENTS.map((c, i) => (
-          <SectionReveal key={c.title} delay={i * 80} from="bottom">
-            <div style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "24px 64px", padding: "32px 0", borderTop: "1px solid rgba(27,43,75,0.1)", alignItems: "start" }}>
+          <SectionReveal key={c.title} delay={i * 60} from="bottom">
+            <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", gap: "0 64px", padding: "40px 0", borderTop: "1px solid rgba(27,43,75,0.12)", alignItems: "center" }}>
               <div>
                 <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 16, color: "var(--color-navy)", marginBottom: 8 }}>{c.title}</p>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, color: "var(--color-muted)", lineHeight: 1.55 }}>{c.note}</p>
+                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 13, color: "var(--color-muted)", lineHeight: 1.6 }}>{c.note}</p>
               </div>
-              <div style={{ padding: "28px", background: "white", borderRadius: 8, display: "flex", alignItems: "center" }}>
+              <div style={{ padding: "32px", background: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center" }}>
                 {c.demo}
               </div>
             </div>
           </SectionReveal>
         ))}
-
       </div>
+
     </section>
   );
 }

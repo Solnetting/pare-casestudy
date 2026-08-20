@@ -1,129 +1,223 @@
 import SectionReveal from "@/components/ui/SectionReveal";
 
-const F = {
-  label: { fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "var(--color-muted)" } as React.CSSProperties,
-  h2:    { fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(48px,6.5vw,80px)", lineHeight: 1.02, letterSpacing: "-0.03em", color: "var(--color-navy)" } as React.CSSProperties,
-  body:  { fontFamily: "var(--font-inter-var)", fontSize: 16, lineHeight: 1.72, color: "var(--color-subtle)" } as React.CSSProperties,
-  sm:    { fontFamily: "var(--font-inter-var)", fontSize: 13, lineHeight: 1.65, color: "var(--color-subtle)" } as React.CSSProperties,
+/* ── Shared style atoms ── */
+const L = (color = "var(--color-muted)") => ({
+  fontFamily: "var(--font-inter-var)" as const,
+  fontSize: 11,
+  fontWeight: 500,
+  letterSpacing: "0.12em",
+  textTransform: "uppercase" as const,
+  color,
+});
+
+const BODY: React.CSSProperties = {
+  fontFamily: "var(--font-inter-var)",
+  fontSize: 16,
+  lineHeight: 1.78,
+  color: "var(--color-subtle)",
 };
 
 const MODEL = [
-  { n: "01", title: "Curated multi-brand retailer", body: "Pare doesn't manufacture anything. It selects and sells products from aligned brands, applying a consistent quality bar across categories. Revenue comes from retail margin — not ads, not data." },
-  { n: "02", title: "A considered edit, not a catalogue", body: "Every product in the range was chosen to reduce decision fatigue. No duplicates, no quantity-over-quality. Fewer, better options organised by how people actually shop." },
-  { n: "03", title: "Recurring purchase at the core", body: "Pare Repeat turns restocking into a frictionless habit for qualifying products. It increases lifetime value without locking every product into a subscription model." },
-];
-
-const WHY = [
-  { q: "Why not a general marketplace?", a: "General marketplaces optimise for breadth and price. Pare optimises for trust and reduced effort. The curation is the product." },
-  { q: "Why mobile-first?",              a: "The target audience browses and buys on mobile. The app removes the friction of comparison-shopping across five tabs by doing the research upfront." },
-  { q: "Why a recurring purchase mode?", a: "Everyday essentials run out on predictable cycles. Automating restocking reduces the tax on attention without requiring a full subscription lock-in." },
+  { n: "01", title: "Curated multi-brand retailer", body: "Pare selects and sells products from aligned brands. Revenue comes from retail margin — not ads, not data. The curation is the product." },
+  { n: "02", title: "A considered edit, not a catalogue", body: "Fewer, better options organised by how people actually shop. No duplicates, no quantity-over-quality. Decision fatigue is the enemy." },
+  { n: "03", title: "Recurring purchase at the core", body: "Pare Repeat turns restocking into a frictionless habit for qualifying products. It increases lifetime value without locking every product into a subscription." },
 ];
 
 export default function Overview() {
   return (
-    <section id="overview" className="section-card" style={{ background: "var(--color-canvas)", padding: "128px 0 140px" }}>
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 56px", position: "relative" }}>
+    <section id="overview" style={{ background: "var(--color-canvas)" }}>
 
-        {/* Decorative number */}
-        <div aria-hidden style={{ position: "absolute", right: -20, top: -60, fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "28vw", lineHeight: 1, color: "var(--color-navy)", opacity: 0.025, pointerEvents: "none", userSelect: "none" }}>01</div>
-
-        {/* Chapter label */}
-        <SectionReveal from="left">
-          <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 40 }}>
-            <span style={F.label}>01</span>
+      {/* ── Chapter header ── */}
+      <div style={{ borderTop: "1px solid var(--color-border)", padding: "48px 80px 0" }}>
+        <SectionReveal>
+          <div style={{ display: "flex", alignItems: "center", gap: 20, paddingBottom: 48, borderBottom: "1px solid var(--color-border)" }}>
+            <span style={L("var(--color-teal)")}>01</span>
             <div style={{ flex: 1, height: 1, background: "var(--color-border)" }}/>
-            <span style={F.label}>Overview</span>
+            <span style={L()}>Overview</span>
           </div>
         </SectionReveal>
+      </div>
 
-        {/* Headline */}
-        <SectionReveal delay={80}>
-          <h2 style={{ ...F.h2, maxWidth: 640, marginBottom: 64 }}>
-            What Pare is — and why it exists.
+      {/* ── Display headline ── */}
+      <div style={{ padding: "72px 80px 0" }}>
+        <SectionReveal>
+          <h2 style={{
+            fontFamily: "var(--font-lora-var)",
+            fontWeight: 600,
+            fontSize: "clamp(52px, 7vw, 96px)",
+            lineHeight: 1.0,
+            letterSpacing: "-0.04em",
+            color: "var(--color-navy)",
+            maxWidth: "80%",
+          }}>
+            What Pare is —<br/>and why it exists.
           </h2>
         </SectionReveal>
 
-        {/* Opening statement */}
-        <SectionReveal delay={120} scale>
-          <div style={{ maxWidth: 660, marginBottom: 96 }}>
-            <p style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(20px,2.5vw,28px)", lineHeight: 1.48, color: "var(--color-navy)", letterSpacing: "-0.01em" }}>
-              &ldquo;Pare&rdquo; means to reduce something to its essential form. It is the product strategy applied to the company name: help people pare their habits down to what actually matters.
-            </p>
-          </div>
+        {/* ── Opening pull quote ── */}
+        <SectionReveal delay={80}>
+          <p style={{
+            fontFamily: "var(--font-lora-var)",
+            fontWeight: 600,
+            fontSize: "clamp(22px, 2.8vw, 40px)",
+            lineHeight: 1.38,
+            letterSpacing: "-0.02em",
+            color: "var(--color-navy)",
+            fontStyle: "italic",
+            maxWidth: 820,
+            margin: "64px 0 0",
+            opacity: 0.72,
+          }}>
+            &ldquo;Pare&rdquo; means to reduce something to its essential form. The name is the product strategy applied to the company name — help people pare their habits down to what actually matters.
+          </p>
         </SectionReveal>
+      </div>
 
-        {/* Positioning row */}
+      {/* ── Stat bar ── */}
+      <SectionReveal style={{ margin: "96px 0 0" }}>
+        <div style={{
+          borderTop: "1px solid var(--color-border)",
+          borderBottom: "1px solid var(--color-border)",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+        }}>
+          {[
+            { n: "3",  label: "Product categories" },
+            { n: "7",  label: "App screens in core flow" },
+            { n: "1",  label: "Checkout path" },
+          ].map(({ n, label }, i) => (
+            <div key={label} style={{
+              padding: "64px 80px",
+              textAlign: "center",
+              borderRight: i < 2 ? "1px solid var(--color-border)" : "none",
+            }}>
+              <p style={{
+                fontFamily: "var(--font-lora-var)",
+                fontWeight: 600,
+                fontSize: "clamp(72px, 9vw, 128px)",
+                lineHeight: 1,
+                letterSpacing: "-0.05em",
+                color: "var(--color-navy)",
+              }}>{n}</p>
+              <p style={{ ...L(), marginTop: 16 }}>{label}</p>
+            </div>
+          ))}
+        </div>
+      </SectionReveal>
+
+      {/* ── Positioning ── */}
+      <div style={{ padding: "96px 80px 0" }}>
         <SectionReveal>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", borderTop: "1px solid var(--color-border)", marginBottom: 96 }}>
-            {[["Positioning","Curated lower-waste essentials retailer"],["Mission","Make sustainable choices the easy default"],["Model","Multi-brand retail + optional repeat purchase"]].map(([k,v],i) => (
-              <div key={k} style={{ padding: "28px 28px 28px 0", borderRight: i<2 ? "1px solid var(--color-border)" : "none", paddingLeft: i>0 ? 28 : 0 }}>
-                <p style={F.label}>{k}</p>
-                <p style={{ ...F.body, marginTop: 8, fontSize: 15 }}>{v}</p>
-              </div>
-            ))}
-          </div>
-        </SectionReveal>
-
-        {/* Business model */}
-        <SectionReveal from="left">
-          <p style={{ ...F.label, marginBottom: 40 }}>Business model</p>
-        </SectionReveal>
-        {MODEL.map((item, i) => (
-          <SectionReveal key={item.n} delay={i * 80} from="bottom">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "24px 64px", padding: "32px 0", borderTop: "1px solid var(--color-border)", alignItems: "start" }}>
-              <div>
-                <span style={{ ...F.label, color: "var(--color-teal)", display: "block", marginBottom: 8 }}>{item.n}</span>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 16, color: "var(--color-navy)", lineHeight: 1.4 }}>{item.title}</p>
-              </div>
-              <p style={F.body}>{item.body}</p>
-            </div>
-          </SectionReveal>
-        ))}
-
-        {/* Target user */}
-        <SectionReveal delay={60} scale style={{ marginTop: 96 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, background: "var(--color-cream)", borderRadius: 12, padding: "64px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "0 80px", borderBottom: "1px solid var(--color-border)", paddingBottom: 80 }}>
             <div>
-              <p style={{ ...F.label, marginBottom: 24 }}>Target user</p>
-              <p style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(24px,3vw,36px)", lineHeight: 1.2, color: "var(--color-navy)", letterSpacing: "-0.02em" }}>
-                Environmentally conscious adults, 25–45.
-              </p>
-              <p style={{ ...F.body, marginTop: 20 }}>
-                They already care about sustainability but find it genuinely hard to act on. Products are scattered, certifications are confusing, greenwashing erodes trust. They want someone to have done the research for them.
-              </p>
+              <p style={L()}>Positioning</p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-              {[["Pain","Overwhelmed by choice, sceptical of claims"],["Goal","Shop in line with values without extra effort"],["Behaviour","Researches before buying, prefers subscriptions for basics"],["Context","Urban, mobile-first, time-poor"]].map(([k,v]) => (
-                <div key={k} style={{ borderTop: "1px solid rgba(27,43,75,0.08)", padding: "16px 0" }}>
-                  <p style={{ ...F.label, color: "var(--color-teal)", marginBottom: 6 }}>{k}</p>
-                  <p style={F.sm}>{v}</p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0 48px" }}>
+              {[
+                ["What",    "Curated lower-waste essentials retailer"],
+                ["Mission", "Make sustainable choices the easy default"],
+                ["Model",   "Multi-brand retail + optional repeat purchase"],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <p style={{ ...L(), marginBottom: 12 }}>{k}</p>
+                  <p style={{ ...BODY, fontSize: 14 }}>{v}</p>
                 </div>
               ))}
             </div>
           </div>
         </SectionReveal>
 
-        {/* Hypothesis + Why */}
-        <div style={{ marginTop: 96, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64 }}>
-          <SectionReveal from="left">
-            <p style={{ ...F.label, marginBottom: 24 }}>Product hypothesis</p>
-            <p style={{ fontFamily: "var(--font-lora-var)", fontSize: "clamp(18px,2vw,22px)", lineHeight: 1.55, color: "var(--color-navy)" }}>
-              If we remove the research burden and reduce the friction of re-purchasing, people who already want to shop sustainably will shop that way more consistently — and feel better doing it.
-            </p>
-            <p style={{ ...F.sm, marginTop: 20, borderTop: "1px solid var(--color-border)", paddingTop: 20 }}>Validated heuristically. Formal usability testing is the planned next step.</p>
+        {/* ── Business model ── */}
+        <SectionReveal style={{ marginTop: 80 }}>
+          <p style={{ ...L(), marginBottom: 48 }}>Business model</p>
+        </SectionReveal>
+        {MODEL.map((item, i) => (
+          <SectionReveal key={item.n} delay={i * 70} from="bottom">
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "80px 1fr 2fr",
+              gap: "0 48px",
+              padding: "36px 0",
+              borderTop: "1px solid var(--color-border)",
+              alignItems: "start",
+            }}>
+              <span style={{ ...L("var(--color-teal)"), paddingTop: 2 }}>{item.n}</span>
+              <p style={{
+                fontFamily: "var(--font-inter-var)",
+                fontWeight: 600,
+                fontSize: 16,
+                lineHeight: 1.4,
+                color: "var(--color-navy)",
+              }}>{item.title}</p>
+              <p style={BODY}>{item.body}</p>
+            </div>
           </SectionReveal>
-          <SectionReveal from="right">
-            <p style={{ ...F.label, marginBottom: 24 }}>Why not just another marketplace?</p>
-            {WHY.map(item => (
-              <div key={item.q} style={{ borderTop: "1px solid var(--color-border)", padding: "18px 0" }}>
-                <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 600, fontSize: 14, color: "var(--color-navy)", marginBottom: 8 }}>{item.q}</p>
-                <p style={F.sm}>{item.a}</p>
+        ))}
+      </div>
+
+      {/* ── Target user — full-bleed dark panel ── */}
+      <SectionReveal style={{ marginTop: 96 }} from="bottom" scale>
+        <div style={{
+          background: "var(--color-navy)",
+          padding: "80px 80px",
+        }}>
+          <p style={{ ...L("rgba(255,255,255,0.3)"), marginBottom: 36 }}>Target user</p>
+          <p style={{
+            fontFamily: "var(--font-lora-var)",
+            fontWeight: 600,
+            fontSize: "clamp(28px, 3.5vw, 52px)",
+            lineHeight: 1.25,
+            letterSpacing: "-0.025em",
+            color: "white",
+            maxWidth: 640,
+            marginBottom: 56,
+          }}>
+            Environmentally conscious adults, 25–45, who want to act on their values without extra effort.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 0 }}>
+            {[
+              ["Pain",      "Overwhelmed by choice, sceptical of greenwashing"],
+              ["Goal",      "Shop in line with values without extra effort"],
+              ["Behaviour", "Researches before buying, prefers subscriptions for basics"],
+              ["Context",   "Urban, mobile-first, time-poor"],
+            ].map(([k, v], i) => (
+              <div key={k} style={{
+                borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                paddingLeft: i > 0 ? 36 : 0,
+                paddingRight: 36,
+              }}>
+                <p style={{ ...L("var(--color-teal)"), marginBottom: 12 }}>{k}</p>
+                <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, lineHeight: 1.65, color: "rgba(255,255,255,0.6)" }}>{v}</p>
               </div>
             ))}
-          </SectionReveal>
+          </div>
         </div>
+      </SectionReveal>
 
+      {/* ── Hypothesis ── */}
+      <div style={{ padding: "96px 80px 140px" }}>
+        <SectionReveal>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "0 80px" }}>
+            <p style={{ ...L(), paddingTop: 3 }}>Product hypothesis</p>
+            <div>
+              <p style={{
+                fontFamily: "var(--font-lora-var)",
+                fontSize: "clamp(20px, 2.2vw, 32px)",
+                lineHeight: 1.5,
+                letterSpacing: "-0.015em",
+                color: "var(--color-navy)",
+                marginBottom: 24,
+              }}>
+                If we remove the research burden and reduce the friction of re-purchasing, people who already want to shop sustainably will shop that way more consistently.
+              </p>
+              <p style={{ ...BODY, fontSize: 14, borderTop: "1px solid var(--color-border)", paddingTop: 20 }}>
+                Validated heuristically via competitor analysis and journey mapping. Formal usability testing is the planned next step.
+              </p>
+            </div>
+          </div>
+        </SectionReveal>
       </div>
+
     </section>
   );
 }

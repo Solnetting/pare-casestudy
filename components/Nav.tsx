@@ -3,32 +3,37 @@
 import { useEffect, useState } from "react";
 
 const CHAPTERS = [
-  { id: "overview",      label: "Overview" },
-  { id: "product",       label: "Product" },
-  { id: "design-system", label: "Design" },
-  { id: "brand",         label: "Brand" },
-  { id: "campaign",      label: "Campaign" },
-  { id: "reflection",    label: "Reflection" },
+  { id: "overview",      n: "01" },
+  { id: "product",       n: "02" },
+  { id: "design-system", n: "03" },
+  { id: "brand",         n: "04" },
+  { id: "campaign",      n: "05" },
+  { id: "reflection",    n: "06" },
 ];
 
 export default function Nav() {
-  const [active, setActive] = useState("");
   const [visible, setVisible] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 100);
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.75);
     window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); }),
-      { rootMargin: "-35% 0px -55% 0px" }
-    );
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
     CHAPTERS.forEach(({ id }) => {
       const el = document.getElementById(id);
-      if (el) io.observe(el);
+      if (!el) return;
+      const io = new IntersectionObserver(
+        ([e]) => { if (e.isIntersecting) setActive(id); },
+        { threshold: 0, rootMargin: "-35% 0px -55% 0px" }
+      );
+      io.observe(el);
+      observers.push(io);
     });
-
-    return () => { window.removeEventListener("scroll", onScroll); io.disconnect(); };
+    return () => observers.forEach(io => io.disconnect());
   }, []);
 
   return (
@@ -36,76 +41,53 @@ export default function Nav() {
       aria-label="Chapter navigation"
       style={{
         position: "fixed",
-        top: 20,
-        left: "50%",
-        transform: `translateX(-50%) translateY(${visible ? 0 : -16}px)`,
+        top: 0,
+        left: 0,
+        right: 0,
         zIndex: 100,
-        opacity: visible ? 1 : 0,
-        pointerEvents: visible ? "auto" : "none",
-        transition: "opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1)",
-        background: "rgba(250,248,245,0.9)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        border: "1px solid rgba(228,221,212,0.55)",
-        borderRadius: 12,
-        boxShadow: "0 4px 28px rgba(27,43,75,0.1), 0 1px 6px rgba(27,43,75,0.06)",
+        height: 44,
         display: "flex",
         alignItems: "center",
-        height: 44,
-        whiteSpace: "nowrap",
-        overflow: "hidden",
+        justifyContent: "space-between",
+        padding: "0 64px",
+        background: "rgba(250,248,245,0.95)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid var(--color-border)",
+        opacity: visible ? 1 : 0,
+        pointerEvents: visible ? "auto" : "none",
+        transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1)",
       }}
     >
-      {/* Wordmark */}
-      <div
-        style={{
-          padding: "0 16px 0 14px",
-          borderRight: "1px solid rgba(228,221,212,0.7)",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexShrink: 0,
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "var(--font-lora-var), serif",
-            fontWeight: 600,
-            fontSize: 16,
-            letterSpacing: "-0.03em",
-            color: "#1B2B4B",
-          }}
-        >
-          Pare
-        </span>
-      </div>
+      <span style={{
+        fontFamily: "var(--font-lora-var)",
+        fontWeight: 600,
+        fontSize: 14,
+        letterSpacing: "-0.025em",
+        color: "var(--color-navy)",
+      }}>
+        Pare
+      </span>
 
-      {/* Links */}
-      <div style={{ display: "flex", padding: "0 4px" }}>
-        {CHAPTERS.map(({ id, label }) => (
-          <a
+      <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
+        {CHAPTERS.map(({ id, n }) => (
+          <button
             key={id}
-            href={`#${id}`}
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })}
             style={{
-              display: "flex",
-              alignItems: "center",
-              height: 44,
-              padding: "0 12px",
-              fontFamily: "var(--font-inter-var), sans-serif",
-              fontSize: 13,
-              fontWeight: active === id ? 500 : 400,
-              color: active === id ? "#1B2B4B" : "#8C9BAD",
-              textDecoration: "none",
-              borderBottom: `1.5px solid ${active === id ? "#2A9D8F" : "transparent"}`,
-              transition: "color 0.2s, border-color 0.2s",
+              fontFamily: "var(--font-inter-var)",
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.1em",
+              color: active === id ? "var(--color-teal)" : "var(--color-muted)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              transition: "color 0.25s",
             }}
           >
-            {label}
-          </a>
+            {n}
+          </button>
         ))}
       </div>
     </nav>

@@ -11,15 +11,11 @@
   --color-border:   #E4DDD4;
   --color-muted:    #8C9BAD;
   --color-subtle:   #6B7A8A;
-
-  --font-display: var(--font-lora-var), Georgia, serif;
-  --font-body:    var(--font-inter-var), system-ui, -apple-system, sans-serif;
-
-  --text-3xl: 1.75rem;
-  --text-4xl: 2rem;
-  --text-5xl: 3rem;
-  --text-6xl: 4rem;
+  --font-display:   var(--font-lora-var), Georgia, serif;
+  --font-body:      var(--font-inter-var), system-ui, sans-serif;
 }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
 
@@ -32,7 +28,7 @@ html { scroll-behavior: smooth; }
 }
 
 body {
-  background-color: var(--color-canvas);
+  background-color: var(--color-navy);
   color: var(--color-navy);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -40,49 +36,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Sections slide up over the previous — scroll-margin accounts for rounded top */
-[id] { scroll-margin-top: 100px; }
+[id] { scroll-margin-top: 60px; }
 
 :focus-visible {
   outline: 1.5px solid var(--color-teal);
   outline-offset: 3px;
 }
 
-/* Chapter section card — rounded top, overlaps previous */
-.section-card {
-  border-radius: 20px 20px 0 0;
-  overflow: hidden;
-}
-
-/* Editorial chapter divider */
-.chapter-rule {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 72px;
-}
-.chapter-rule::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--color-border);
-}
-
-/* Reveal animation */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
-}
-
-/* Horizontal scroll (phone flow) */
 .flow-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -90,10 +50,9 @@ body {
 }
 .flow-scroll::-webkit-scrollbar { display: none; }
 
-/* Phone frame shadow */
 .frame-shadow {
   box-shadow:
     0 0 0 1px rgba(27,43,75,0.07),
-    0 20px 56px rgba(27,43,75,0.14),
+    0 24px 64px rgba(27,43,75,0.16),
     0 4px 12px rgba(27,43,75,0.07);
 }

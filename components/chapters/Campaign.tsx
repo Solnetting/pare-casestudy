@@ -304,6 +304,42 @@ export default function Campaign() {
         </div>
       </div>
 
+      {/* ── In the wild ── */}
+      <div style={{ padding: "72px 0 0" }}>
+        <SectionReveal>
+          <div style={{ padding: "0 80px", marginBottom: 48 }}>
+            <p style={{ ...L(), marginBottom: 12 }}>In the wild</p>
+            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 14, lineHeight: 1.65, color: "var(--color-subtle)", maxWidth: 480 }}>
+              Real-world deployment — the same artwork on the street, in context.
+            </p>
+          </div>
+        </SectionReveal>
+        <div
+          className="flow-scroll"
+          style={{ display: "flex", gap: 16, paddingLeft: 80, paddingRight: 80, paddingBottom: 8 }}
+        >
+          {[
+            { src: "/kakemono-irl-1.png", label: "Street — shopping district" },
+          ].map((p, i) => (
+            <div key={i} style={{ flexShrink: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.src}
+                alt={p.label}
+                style={{
+                  height: 560,
+                  width: "auto",
+                  borderRadius: 6,
+                  display: "block",
+                  boxShadow: "0 12px 48px rgba(27,43,75,0.16), 0 2px 8px rgba(27,43,75,0.06)",
+                }}
+              />
+              <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, fontWeight: 500, color: "var(--color-navy)" }}>{p.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── QR + System rules ── */}
       <div style={{ padding: "96px 80px 140px" }}>
         <SectionReveal>

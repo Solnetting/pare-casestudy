@@ -114,7 +114,7 @@ export default function Hero() {
         </div>
 
         {/* Text slides — stacked, crossfade */}
-        <div style={{ position: "relative", marginTop: "16vh", height: 400 }}>
+        <div style={{ position: "relative", marginTop: "16vh", height: 460 }}>
           {SLIDES.map((slide, i) => (
             <div
               key={i}
@@ -128,14 +128,14 @@ export default function Hero() {
               {/* key change remounts this div → CSS animations restart */}
               <div key={slideKeys[i]} className="slide-text">
                 <p className="slide-label" style={{
-                  fontFamily: "var(--font-inter-var)", fontSize: 12, fontWeight: 700,
-                  letterSpacing: "0.14em", textTransform: "uppercase", color: "#197f78", marginBottom: 22,
+                  fontFamily: "var(--font-inter-var)", fontSize: 19, fontWeight: 700,
+                  letterSpacing: "0.11em", textTransform: "uppercase", color: "#197f78", marginBottom: 20,
                 }}>{slide.label}</p>
 
                 <h1 className="slide-headline" style={{
                   fontFamily: "var(--font-lora-var)", fontWeight: 700,
-                  fontSize: "clamp(38px, 4.5vw, 76px)", lineHeight: 1.06,
-                  letterSpacing: "-0.03em", color: "#203552", margin: "0 0 36px",
+                  fontSize: "clamp(36px, 4.17vw, 64px)", lineHeight: 1.14,
+                  letterSpacing: "-0.02em", color: "#203552", margin: "0 0 38px",
                 }}>
                   {slide.lines[0]}<br/>
                   {slide.lines[1]}{slide.lines[2] && <><br/>{slide.lines[2]}</>}
@@ -143,8 +143,8 @@ export default function Hero() {
 
                 <p className="slide-body" style={{
                   fontFamily: "var(--font-inter-var)",
-                  fontSize: "clamp(15px, 1.25vw, 20px)", lineHeight: 1.65,
-                  color: "#53657a", maxWidth: 460,
+                  fontSize: "clamp(16px, 1.56vw, 24px)", lineHeight: 1.55,
+                  color: "#53657a", maxWidth: 500,
                 }}>{slide.body}</p>
               </div>
             </div>

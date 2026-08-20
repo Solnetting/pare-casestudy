@@ -275,11 +275,12 @@ export default function Campaign() {
           style={{ display: "flex", gap: 16, paddingLeft: 80, paddingRight: 80, paddingBottom: 8 }}
         >
           {[
-            { src: "/kakemono-1.png", label: "Cream — day" },
-            { src: "/kakemono-2.png", label: "Navy — evening" },
-            { src: "/kakemono-3.png", label: "Arch — neutral" },
-            { src: "/kakemono-4.png", label: "Warm — apricot" },
-            { src: "/kakemono-5.png", label: "Teal accent" },
+            { src: "/kakemono-1.png", label: "Terracotta split" },
+            { src: "/kakemono-2.png", label: "Warm oat" },
+            { src: "/kakemono-3.png", label: "Warm terracotta" },
+            { src: "/kakemono-4.png", label: "Teal-led" },
+            { src: "/kakemono-5.png", label: "Navy — arch" },
+            { src: "/kakemono-6.png", label: "Navy — full" },
           ].map((p, i) => (
             <div key={i} style={{ flexShrink: 0, display: "flex", flexDirection: "column", gap: 14 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}

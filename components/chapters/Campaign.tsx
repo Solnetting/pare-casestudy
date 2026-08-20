@@ -149,27 +149,36 @@ function MetaStory() {
   );
 }
 
-function LinkedInAd() {
+function LinkedInAd1x1() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <div style={{ width: 320, background: "white", borderRadius: 6, overflow: "hidden", boxShadow: "0 2px 16px rgba(27,43,75,0.08)" }}>
-        <div style={{ height: 160, background: "#F4EBD6", position: "relative", display: "flex", alignItems: "center", padding: "0 28px" }}>
-          <div style={{ position: "absolute", right: -20, top: -20, width: 180, height: 180, borderRadius: "50%", background: "#FAE5D3", opacity: 0.7 }}/>
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <p style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: 26, lineHeight: 1.15, color: "#1B2B4B", letterSpacing: "-0.02em" }}>The Home Reset.</p>
-            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, color: "#6B7A8A", marginTop: 6 }}>Shop the spring edit at Pare</p>
-          </div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 14px", borderTop: "1px solid #F0EDE8" }}>
-          <div>
-            <p style={{ fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 12, color: "#1B2B4B" }}>pare.com/reset</p>
-            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 10, color: "#8C9BAD" }}>Lower-waste essentials</p>
-          </div>
-          <button style={{ border: "1.5px solid #E4DDD4", borderRadius: 4, padding: "5px 12px", fontFamily: "var(--font-inter-var)", fontWeight: 500, fontSize: 11, color: "#1B2B4B", background: "transparent", cursor: "default" }}>Shop now</button>
-        </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/linkedin-ad-1x1.png"
+        alt="LinkedIn 1:1 ad"
+        style={{ width: 300, height: 300, objectFit: "cover", borderRadius: 6, display: "block", boxShadow: "0 8px 40px rgba(27,43,75,0.14), 0 2px 8px rgba(27,43,75,0.06)" }}
+      />
+      <div>
+        <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, fontWeight: 500, color: "var(--color-navy)" }}>LinkedIn — 1:1</p>
+        <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "var(--color-muted)", marginTop: 2 }}>1200 × 1200px</p>
       </div>
-      <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, fontWeight: 500, color: "var(--color-navy)" }}>LinkedIn ad</p>
-      <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "var(--color-muted)" }}>1200 × 627px</p>
+    </div>
+  );
+}
+
+function LinkedInAd9x16() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/linkedin-ad-9x16.png"
+        alt="LinkedIn 9:16 ad"
+        style={{ width: 169, height: 300, objectFit: "cover", borderRadius: 6, display: "block", boxShadow: "0 8px 40px rgba(27,43,75,0.14), 0 2px 8px rgba(27,43,75,0.06)" }}
+      />
+      <div>
+        <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 12, fontWeight: 500, color: "var(--color-navy)" }}>LinkedIn — 9:16</p>
+        <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, color: "var(--color-muted)", marginTop: 2 }}>1080 × 1920px</p>
+      </div>
     </div>
   );
 }
@@ -256,7 +265,8 @@ export default function Campaign() {
           <SectionReveal from="left"><Totem/></SectionReveal>
           <SectionReveal from="bottom" delay={80}><MetaStory/></SectionReveal>
           <SectionReveal from="right" delay={120}><CatalogueCover/></SectionReveal>
-          <SectionReveal from="right" delay={180}><LinkedInAd/></SectionReveal>
+          <SectionReveal from="right" delay={160}><LinkedInAd1x1/></SectionReveal>
+          <SectionReveal from="right" delay={200}><LinkedInAd9x16/></SectionReveal>
         </div>
       </div>
 

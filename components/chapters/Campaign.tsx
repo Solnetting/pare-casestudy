@@ -40,7 +40,7 @@ function CampaignHero() {
       <div style={{ position: "relative", zIndex: 1, padding: "80px 96px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 36 }}>
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#2A9D8F" }}/>
-          <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", color: "#8C9BAD", textTransform: "uppercase" }}>Spring 2025</span>
+          <span style={{ fontFamily: "var(--font-inter-var)", fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", color: "#8C9BAD", textTransform: "uppercase" }}>Spring 2026</span>
         </div>
         <h3 style={{ fontFamily: "var(--font-lora-var)", fontWeight: 600, fontSize: "clamp(56px, 7.5vw, 100px)", lineHeight: 0.95, letterSpacing: "-0.04em", color: "#1B2B4B", maxWidth: 560 }}>
           The<br/>Home<br/>Reset.
@@ -190,7 +190,7 @@ function CatalogueCover() {
         <div style={{ position: "relative", zIndex: 1 }}>
           <div style={{ height: 1, background: "#E4DDD4", marginBottom: 7 }}/>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 7.5, color: "#8C9BAD" }}>Spring 2025</p>
+            <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 7.5, color: "#8C9BAD" }}>Spring 2026</p>
             <p style={{ fontFamily: "var(--font-inter-var)", fontSize: 7.5, color: "#8C9BAD" }}>pare.com</p>
           </div>
         </div>

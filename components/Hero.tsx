@@ -41,13 +41,13 @@ export default function Hero() {
         padding: "44px 52px 56px",
       }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.svg" alt="Pare" style={{ width: 100, height: "auto" }}/>
+        <img src="/logo.svg" alt="Pare" style={{ width: 100, height: "auto", filter: "brightness(0) invert(1)" }}/>
 
         <div>
           <div style={{ width: 24, height: 1, background: "rgba(255,255,255,0.18)", marginBottom: 28 }}/>
           {[
             ["Role",  "Product Design"],
-            ["Year",  "2025"],
+            ["Year",  "2026"],
             ["Scope", "App · Brand · Campaign"],
           ].map(([k, v]) => (
             <div key={k} style={{ marginBottom: 20 }}>
@@ -87,7 +87,7 @@ export default function Hero() {
           textTransform: "uppercase",
           color: "var(--color-muted)",
         }}>
-          Case Study · 2025
+          Case Study · 2026
         </p>
 
         <h1

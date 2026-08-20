@@ -159,7 +159,7 @@ export default function Hero() {
             onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" })}
             style={{ fontFamily: "var(--font-inter-var)" }}
           >
-            <span>{SLIDES[current].cta}</span>
+            <span>Explore Pare</span>
           </button>
         </div>
 

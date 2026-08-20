@@ -96,7 +96,7 @@ export default function Nav() {
 
       {/* Prototype link */}
       <a
-        href="https://pare-lurwwo3yh-carlosmeradesign-3615s-projects.vercel.app"
+        href="https://pare-app-three.vercel.app"
         target="_blank"
         rel="noopener noreferrer"
         style={{

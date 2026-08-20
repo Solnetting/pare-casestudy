@@ -3,154 +3,143 @@
 import { useEffect, useRef } from "react";
 
 export default function Hero() {
-  const headRef = useRef<HTMLHeadingElement>(null);
-  const subRef  = useRef<HTMLParagraphElement>(null);
-  const metaRef = useRef<HTMLDivElement>(null);
+  const logoRef  = useRef<HTMLDivElement>(null);
+  const bgRef    = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLParagraphElement>(null);
+  const line1Ref = useRef<HTMLSpanElement>(null);
+  const line2Ref = useRef<HTMLSpanElement>(null);
+  const line3Ref = useRef<HTMLSpanElement>(null);
+  const bodyRef  = useRef<HTMLParagraphElement>(null);
+  const ctaRef   = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
     const ease = "cubic-bezier(0.16,1,0.3,1)";
-    const items: [React.RefObject<HTMLElement | null>, number][] = [
-      [headRef as React.RefObject<HTMLElement>, 60],
-      [subRef  as React.RefObject<HTMLElement>, 200],
-      [metaRef as React.RefObject<HTMLElement>, 320],
+
+    // [ref, delayMs, initial transform]
+    const items: [React.RefObject<HTMLElement | null>, number, string][] = [
+      [bgRef    as React.RefObject<HTMLElement>,  80,  "translateX(32px)"],
+      [logoRef  as React.RefObject<HTMLElement>,  0,   "translateY(-18px)"],
+      [labelRef as React.RefObject<HTMLElement>,  260, "translateY(24px)"],
+      [line1Ref as React.RefObject<HTMLElement>,  380, "translateY(40px)"],
+      [line2Ref as React.RefObject<HTMLElement>,  470, "translateY(40px)"],
+      [line3Ref as React.RefObject<HTMLElement>,  560, "translateY(40px)"],
+      [bodyRef  as React.RefObject<HTMLElement>,  700, "translateY(24px)"],
+      [ctaRef   as React.RefObject<HTMLElement>,  840, "translateY(18px)"],
     ];
-    items.forEach(([ref, delay]) => {
+
+    items.forEach(([ref, delay, transform]) => {
       const el = ref.current;
       if (!el) return;
       el.style.opacity = "0";
-      el.style.transform = "translateY(36px)";
+      el.style.transform = transform;
       setTimeout(() => {
-        el.style.transition = `opacity 1s ${ease}, transform 1s ${ease}`;
+        el.style.transition = `opacity 0.95s ${ease}, transform 0.95s ${ease}`;
         el.style.opacity = "1";
-        el.style.transform = "translateY(0)";
+        el.style.transform = "translateY(0) translateX(0)";
       }, delay);
     });
   }, []);
 
   return (
-    <header style={{ display: "grid", gridTemplateColumns: "38fr 62fr", minHeight: "100svh" }}>
+    <header style={{ position: "relative", minHeight: "100svh", overflow: "hidden", background: "#F7F3EB" }}>
 
-      {/* Left — navy spine */}
-      <div style={{
-        background: "var(--color-navy)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        padding: "44px 52px 56px",
-      }}>
+      {/* Full-bleed background image + cream gradient veil */}
+      <div ref={bgRef} style={{ position: "absolute", inset: 0 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.svg" alt="Pare" style={{ width: 100, height: "auto", filter: "brightness(0) invert(1)" }}/>
-
-        <div>
-          <div style={{ width: 24, height: 1, background: "rgba(255,255,255,0.18)", marginBottom: 28 }}/>
-          {[
-            ["Role",  "Product Design"],
-            ["Year",  "2026"],
-            ["Scope", "App · Brand · Campaign"],
-          ].map(([k, v]) => (
-            <div key={k} style={{ marginBottom: 20 }}>
-              <p style={{
-                fontFamily: "var(--font-inter-var)",
-                fontSize: 10,
-                fontWeight: 500,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.3)",
-                marginBottom: 4,
-              }}>{k}</p>
-              <p style={{
-                fontFamily: "var(--font-inter-var)",
-                fontSize: 13,
-                color: "rgba(255,255,255,0.65)",
-                lineHeight: 1.5,
-              }}>{v}</p>
-            </div>
-          ))}
-        </div>
+        <img
+          src="/hero-bg.png"
+          alt=""
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "60% center" }}
+        />
+        {/* Cream gradient that veils the left side, matching the Figma overlay */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to right, #F7F3EB 0%, #F7F3EB 32%, rgba(247,243,235,0.88) 48%, rgba(247,243,235,0.3) 62%, transparent 74%)",
+        }}/>
       </div>
 
-      {/* Right — canvas */}
+      {/* Content — positioned over the cream left zone */}
       <div style={{
-        background: "var(--color-canvas)",
+        position: "relative",
+        zIndex: 1,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        padding: "44px 80px 64px 72px",
+        minHeight: "100svh",
+        padding: "52px 0 72px 72px",
+        maxWidth: 680,
       }}>
-        <p style={{
-          fontFamily: "var(--font-inter-var)",
-          fontSize: 11,
-          fontWeight: 500,
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-          color: "var(--color-muted)",
-        }}>
-          Case Study · 2026
-        </p>
 
-        <h1
-          ref={headRef}
-          style={{
+        {/* Logo */}
+        <div ref={logoRef}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="Pare" style={{ width: 90, height: "auto" }}/>
+        </div>
+
+        {/* Text block — pushed to lower vertical centre */}
+        <div style={{ marginTop: "auto" }}>
+
+          <p ref={labelRef} style={{
+            fontFamily: "var(--font-inter-var)",
+            fontSize: 12,
+            fontWeight: 700,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "#197f78",
+            marginBottom: 22,
+          }}>Curated Everyday</p>
+
+          <h1 style={{
             fontFamily: "var(--font-lora-var)",
-            fontWeight: 600,
-            fontSize: "clamp(52px, 7.5vw, 112px)",
-            lineHeight: 0.95,
-            letterSpacing: "-0.04em",
-            color: "var(--color-navy)",
-            margin: 0,
-          }}
-        >
-          Make the<br/>
-          better<br/>
-          choice<br/>
-          <em style={{ fontStyle: "italic", color: "var(--color-teal)" }}>feel easy.</em>
-        </h1>
+            fontWeight: 700,
+            fontSize: "clamp(38px, 4.5vw, 76px)",
+            lineHeight: 1.06,
+            letterSpacing: "-0.03em",
+            color: "#203552",
+            margin: "0 0 36px",
+          }}>
+            <span ref={line1Ref} style={{ display: "block" }}>Make sustainable</span>
+            <span ref={line2Ref} style={{ display: "block" }}>choices the easy</span>
+            <span ref={line3Ref} style={{ display: "block" }}>default.</span>
+          </h1>
 
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 40 }}>
-          <p
-            ref={subRef}
-            style={{
-              fontFamily: "var(--font-inter-var)",
-              fontSize: 17,
-              lineHeight: 1.68,
-              color: "var(--color-subtle)",
-              maxWidth: 340,
-              margin: 0,
-            }}
-          >
-            A curated sustainable retailer — where the better option is always the easier one.
+          <p ref={bodyRef} style={{
+            fontFamily: "var(--font-inter-var)",
+            fontSize: "clamp(15px, 1.25vw, 20px)",
+            lineHeight: 1.65,
+            color: "#53657a",
+            maxWidth: 400,
+            marginBottom: 48,
+          }}>
+            A considered edit of verified, lower-impact<br/>
+            products from trusted makers.
           </p>
 
-          <div ref={metaRef} style={{ flexShrink: 0, textAlign: "right" }}>
-            <a
-              href="#overview"
-              onClick={e => {
-                e.preventDefault();
-                document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" });
-              }}
+          <div ref={ctaRef}>
+            <button
+              onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" })}
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
+                background: "#1a7a70",
+                color: "white",
+                border: "none",
+                borderRadius: 8,
+                padding: "0 24px",
+                height: 44,
                 fontFamily: "var(--font-inter-var)",
-                fontSize: 11,
-                fontWeight: 500,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--color-teal)",
-                textDecoration: "none",
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: "pointer",
+                letterSpacing: "0.01em",
               }}
             >
-              01 — Overview
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 1v10M2 7l4 4 4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
+              Explore more
+            </button>
           </div>
         </div>
       </div>
+
     </header>
   );
 }
